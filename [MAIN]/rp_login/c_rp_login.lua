@@ -3,6 +3,7 @@ loadstring(exports.dgs:dgsImportOOPClass(true))()-- load OOP class
 
 
 addEventHandler("onClientResourceStart", resourceRoot, function()
+    print("Start");
     showChat(false);
     setPlayerHudComponentVisible("all", false);
 
@@ -32,6 +33,5 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
             GUI.elements.online_blink:alphaTo(0, "Linear", 500); 
             GUI.vars.online = false
         end
-        
     end, 1000, 0);
 end)
