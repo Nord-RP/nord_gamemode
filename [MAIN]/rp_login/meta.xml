@@ -1,0 +1,15 @@
+<meta>
+  <info author="Allerek" type="script" name="rp_login"/>
+  <script src="c_gui_data.lua" type="client" cache="false"/>
+  <script src="c_rp_login.lua" type="client" cache="false"/>
+  <script src="s_rp_login.lua" type="server"/>
+
+  <file src="files/fonts/TiltWarp_PL.ttf"/>
+
+  
+  <file src="files/img/panel_bg.png"/>
+  <file src="files/img/panel_bg_left.png"/>
+  <file src="files/img/online.png"/>
+  <file src="files/img/online_blink.png"/>
+  <oop>true</oop>
+</meta>
