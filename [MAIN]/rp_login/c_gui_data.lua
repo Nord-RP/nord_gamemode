@@ -14,7 +14,14 @@ GUI.txt = {
     --Register
     ["register"] = dxCreateTexture("files/img/register.png", "argb", true, "wrap"),
     ["register_hover"] = dxCreateTexture("files/img/register_hover.png", "argb", true, "wrap"),
-    ["register_off"] = dxCreateTexture("files/img/register_off.png", "argb", true, "wrap")
+    ["register_off"] = dxCreateTexture("files/img/register_off.png", "argb", true, "wrap"),
+    ["edit"] = dxCreateTexture("files/img/editbox.png", "argb", true, "wrap"),
+    ["edit_active"] = dxCreateTexture("files/img/editbox_active.png", "argb", true, "wrap"),
+    ["checkbox"] = dxCreateTexture("files/img/checkbox.png", "argb", true, "wrap"),
+    ["checkbox_hover"] = dxCreateTexture("files/img/checkbox_hover.png", "argb", true, "wrap"),
+    ["checkbox_active"] = dxCreateTexture("files/img/checkbox_active.png", "argb", true, "wrap"),
+    ["button"] = dxCreateTexture("files/img/login_button.png", "argb", true, "wrap"),
+    ["button_active"] = dxCreateTexture("files/img/login_button_active.png", "argb", true, "wrap")
 }
 
 GUI.scale = {
@@ -22,7 +29,10 @@ GUI.scale = {
     ["panel_bg_left"] = {w=538/zoom, h=967/zoom},
     ["online"] = {w=32/zoom, h=32/zoom},
     ["login"] = {w=182/zoom, h=45/zoom},
-    ["register"] = {w=189/zoom, h=45/zoom}
+    ["register"] = {w=189/zoom, h=45/zoom},
+    ["edit"] = {w=731/zoom, h=132/zoom},
+    ["checkbox"] = {w=48/zoom, h=48/zoom},
+    ["button"] = {w=527/zoom, h=128/zoom}
 }
 
 GUI.pos = {
@@ -32,12 +42,17 @@ GUI.pos = {
     ["online_label"] = {x=GUI.scale.panel_bg.w-139/zoom,y=178/zoom},
     ["online"] = {x=GUI.scale.panel_bg.w-224/zoom,y=180/zoom},
     ["login"] = {x=565/zoom,y=285/zoom},
-    ["register"] = {x=772/zoom,y=285/zoom}
+    ["register"] = {x=772/zoom,y=285/zoom},
+    ["edit_login"] = {x=530/zoom,y=350/zoom},
+    ["edit_password"] = {x=530/zoom,y=350/zoom+GUI.scale.edit.h+20/zoom},
+    ["checkbox"] = {x=540/zoom,y=350/zoom+GUI.scale.edit.h+20/zoom+GUI.scale.checkbox.h*2+20/zoom},
+    ["button"] = {x=540/zoom+GUI.scale.edit.w/2-GUI.scale.button.w/2,y=350/zoom+GUI.scale.edit.h+20/zoom+GUI.scale.checkbox.h*2+20/zoom+50/zoom},
 }
 
 GUI.fonts = {
-    ["font_4"] = dxCreateFont("files/fonts/TiltWarp_PL.ttf", 18.03/zoom, false),
-    ["font_12"] = dxCreateFont("files/fonts/TiltWarp_PL.ttf", 50.48/zoom, false)
+    ["font_18"] = dxCreateFont("files/fonts/TiltWarp_PL.ttf", 18.03/zoom, false),
+    ["font_50"] = dxCreateFont("files/fonts/TiltWarp_PL.ttf", 50.48/zoom, false),
+    ["font_32"] = dxCreateFont("files/fonts/TiltWarp_PL.ttf", 32.72/zoom, false)
 }
 
 GUI.timers = {}

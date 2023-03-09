@@ -20,6 +20,16 @@
   <file src="files/img/register_hover.png"/>
   <file src="files/img/register_off.png"/>
 
+  <file src="files/img/editbox.png"/>
+  <file src="files/img/editbox_active.png"/>
+
+  <file src="files/img/checkbox.png"/>
+  <file src="files/img/checkbox_hover.png"/>
+  <file src="files/img/checkbox_active.png"/>
+
+  <file src="files/img/login_button.png"/>
+  <file src="files/img/login_button_active.png"/>
+
 
   <file src="files/movie/bg_video.webm"/>
 
