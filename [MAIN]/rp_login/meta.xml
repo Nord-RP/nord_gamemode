@@ -11,5 +11,18 @@
   <file src="files/img/panel_bg_left.png"/>
   <file src="files/img/online.png"/>
   <file src="files/img/online_blink.png"/>
+
+  <file src="files/img/login.png"/>
+  <file src="files/img/login_hover.png"/>
+  <file src="files/img/login_off.png"/>
+
+  <file src="files/img/register.png"/>
+  <file src="files/img/register_hover.png"/>
+  <file src="files/img/register_off.png"/>
+
+
+  <file src="files/movie/bg_video.webm"/>
+
+  <file src="files/sound/bg_music.mp3"/>
   <oop>true</oop>
 </meta>
