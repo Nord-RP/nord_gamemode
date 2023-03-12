@@ -1,6 +1,6 @@
 loadstring(exports.dgs:dgsImportOOPClass(true))() -- load OOP class
 local sW, sH = guiGetScreenSize()
-local dev = false
+local dev = true
 
 addEventHandler("onClientResourceStart", resourceRoot, function()
     showChat(false);
