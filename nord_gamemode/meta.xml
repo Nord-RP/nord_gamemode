@@ -1,0 +1,22 @@
+<meta>
+  <info author="Allerek" type="script" name="nord_gamemode"/>
+  <script src="c_nord_gamemode.lua" type="client" cache="false"/>
+  <script src="dbmanager.lua" type="server"/>
+  <script src="s_nord_gamemode.lua" type="server"/>
+  <script src="login/s_login.lua" type="server"/>
+  <script src="login/c_data.lua" type="client"/>
+  <script src="login/c_login.lua" type="client"/>
+  <script src="s_models.lua" type="server"/>
+
+
+  <file src="login/files/movie/bg_video.webm"/>
+  <file src="login/files/img/bg.png"/>
+  <file src="login/files/img/editbox.png"/>
+  <file src="login/files/img/editbox_active.png"/>
+  <file src="login/files/img/button_login.png"/>
+  <file src="login/files/img/button_login_active.png"/>
+  <file src="login/files/fonts/Roboto-Medium.ttf"/>
+  <file src="login/files/fonts/Roboto-Regular.ttf"/>
+  <file src="login/files/sounds/bg_music.mp3"/>
+  <oop>true</oop>
+</meta>
