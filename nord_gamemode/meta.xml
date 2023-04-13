@@ -15,8 +15,12 @@
   <file src="login/files/img/editbox_active.png"/>
   <file src="login/files/img/button_login.png"/>
   <file src="login/files/img/button_login_active.png"/>
+  <file src="login/files/img/checkbox.png"/>
+  <file src="login/files/img/checkbox_active.png"/>
+  <file src="login/files/img/checkbox_hover.png"/>
   <file src="login/files/fonts/Roboto-Medium.ttf"/>
   <file src="login/files/fonts/Roboto-Regular.ttf"/>
+  <file src="login/files/fonts/Roboto-Bold.ttf"/>
   <file src="login/files/sounds/bg_music.mp3"/>
   <oop>true</oop>
 </meta>

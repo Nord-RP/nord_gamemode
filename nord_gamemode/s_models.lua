@@ -1,4 +1,4 @@
-forumAccounts = DBConn:define("ips_core_members", {
+forumAccountsModel = DBConn:define("ips_core_members", {
     member_id={
         type = DBManager.INT(11),
         primaryKey = true,
@@ -12,7 +12,7 @@ forumAccounts = DBConn:define("ips_core_members", {
     },
 })
 
-characters = DBConn:define("mta_characters", {
+charactersModel = DBConn:define("mta_characters", {
     id={
         type = DBManager.INT(11),
         primaryKey = true,
@@ -49,6 +49,18 @@ characters = DBConn:define("mta_characters", {
         type = DBManager.INT(11),
     }
 })
+
+authTokenModel = DBConn:define("mta_auth_token", {
+    id={
+        type = DBManager.INT(11),
+        primaryKey = true,
+        autoIncrement = true
+    },
+    token={
+        type = DBManager.STRING(255),
+    },
+})
+
 
 
 DBConn:sync()
