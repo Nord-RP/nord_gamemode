@@ -6,6 +6,7 @@
   <script src="login/s_login.lua" type="server"/>
   <script src="login/c_data.lua" type="client"/>
   <script src="login/c_login.lua" type="client"/>
+  <script src="login/c_login_character.lua" type="client"/>
   <script src="s_models.lua" type="server"/>
 
 

@@ -1,4 +1,13 @@
 
+--Dodać usuwanie z tablicy online po wyjściu
+--Dodać sprawdzanie czy to konto jest już online
+--Dodać ustawianie elementdat zew. zasobem
+--Powiadomienia:
+--Konto o podanych danych nie istnieje(bez rozróżnienia na nick/hasło)
+--Konto nie posiada postaci
+
+local onlinePlayers = {}
+
 addEvent("onLoginRequest", true)
 addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, token)
     print("SName: "..name)
@@ -20,6 +29,7 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
             }
         })
         print("Loging with token")
+        onlinePlayers[user.name] = true
         charactersModel:sync()
         local characters = charactersModel:findAll({where = {owner_id = user.member_id}})
         if (not characters) then
@@ -83,5 +93,3 @@ function randomString(length)
     math.randomseed(os.clock()^5)
     return randomString(length - 1) .. charset[math.random(1, #charset)]
 end
-
-  

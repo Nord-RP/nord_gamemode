@@ -1,3 +1,6 @@
+
+--Dodać 'zapomniałem hasła' - skopiowanie linku do forum+powiadomienie
+    
 local sW, sH = guiGetScreenSize()
 local login = false
 local passLen = false
@@ -93,7 +96,9 @@ function loginUser(button, state)
     if(state == "down") then return end
     login = GUI.elements.edit_login:getText()
     local pass = GUI.elements.edit_password:getText()
-    passLen = string.len(pass)
+    if (not remembered) then
+        passLen = string.len(pass)
+    end
     local remember = GUI.elements.checkbox:getSelected()
     triggerServerEvent("onLoginRequest", resourceRoot, login, pass, remember, token)
 end
@@ -127,10 +132,7 @@ addEventHandler("onClientLoginRequest", getRootElement(), function(status, chara
     GUI.elements.browser_image:getElement():destroy()
     GUI.elements.browser:destroy()
     Camera.fade(true)
-    localPlayer:setInterior(6, 246, 62, 1002)
-    Camera.setMatrix(217, 78, 1005.5, 215, 78, 1005.5)
-    local ped = Ped(0, 215, 77.5, 1005, -90)
-    ped:setInterior(6, 215, 77.5, 1005)
+    displayCharacterSelection(characters)
 end)
 
 function dgsFocus()
