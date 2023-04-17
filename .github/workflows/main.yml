@@ -30,7 +30,7 @@ jobs:
       run: npm install
 
     - name: Compile
-      run: npm run build
+      run: npm start
 
     - name: Archive compiled folder
       run: zip -r compiled.zip compiled
