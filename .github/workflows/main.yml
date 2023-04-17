@@ -29,7 +29,7 @@ jobs:
         run: cd nord-compiler && npm install
         
       - name: Przenieś pliki zasobów
-        run: mv resources nord-compiler/resources && rm nord-compiler/resources/README.md
+        run: mv resources nord-compiler/resources && rm nord-compiler/resources/README.md && rm -rf nord-compiler/resources/.github  && rm -rf nord-compiler/resources/.git && mv nord-compiler/resources/[BAZA] nord-compiler/compiled/resources/[BAZA]
         
       - name: List Files
         run: ls -R
