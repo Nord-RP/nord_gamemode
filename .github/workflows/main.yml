@@ -16,9 +16,6 @@ jobs:
         with:
           ref: ${{ github.ref }}
           path: resources
-          
-      - name: List Files1
-        run: ls -R
 
       - name: Pobierz repozytorium B
         uses: actions/checkout@v2
@@ -39,6 +36,9 @@ jobs:
         
       - name: Wykonaj polecenie node index.js w folderze nord-compiler
         run: cd nord-compiler && node index.js
+        
+      - name: List Files1
+        run: ls -R
         
       - name: Spakuj folder compiled do pliku ZIP
         run: cd nord-compiler && zip -r compiled.zip compiled
