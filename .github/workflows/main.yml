@@ -65,8 +65,10 @@ jobs:
             Release for commit ${{ github.sha }}
           commitish: ${{ github.ref }}
         
-      - name: Przesyłanie paczki skompilowanych plików
+      - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: nord-compiler/compiled.zip
