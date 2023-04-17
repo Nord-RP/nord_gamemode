@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
+          path: nord-compiler/resources
           
       - name: List Files1
         run: ls -R
@@ -23,9 +24,6 @@ jobs:
         with:
           repository: Nord-RP/nord_compiler
           path: nord-compiler
-
-      - name: Przenieś repozytorium A do katalogu resources
-        run: mv nord_gamemode nord-compiler/resources/
 
       - name: Zainstaluj moduły Node.js w folderze nord-compiler
         run: cd nord-compiler && npm install
