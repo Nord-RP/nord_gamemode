@@ -24,5 +24,8 @@ jobs:
       - name: Przenieś repozytorium A do katalogu resources
         run: mv nord_gamemode nord-compiler/resources/
 
+      - name: Zainstaluj moduły Node.js w folderze nord-compiler
+        run: cd nord-compiler && npm install
+
       - name: Wykonaj polecenie node index.js w folderze nord-compiler
         run: cd nord-compiler && node index.js
