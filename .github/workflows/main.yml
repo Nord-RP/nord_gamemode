@@ -53,13 +53,17 @@ jobs:
 
       - name: Create Release
         uses: actions/create-release@v1
-        with:
-          tag_name: "TEST"
-          release_name: "TEST"
-          draft: false
-          prerelease: false
+        id: create_release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.run_number }}
+          release_name: ${{ github.run_number }}
+          draft: false
+          prerelease: false
+          body: |
+            Release for commit ${{ github.sha }}
+          commitish: ${{ github.ref }}
         
       - name: Przesyłanie paczki skompilowanych plików
         uses: actions/upload-release-asset@v1
