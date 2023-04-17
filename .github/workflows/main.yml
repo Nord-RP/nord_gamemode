@@ -1,51 +1,49 @@
-name: Build and Release
+name: Compile and Release
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository B
+      uses: actions/checkout@v2
       with:
-        submodules: 'recursive'
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
-    - name: Install Dependencies
+        repository: Nord-RP/nord_compiler
+        path: nord-compiler
+    
+    - name: Copy files to nord-compiler/resources
+      run: cp -r !(nord-compiler) nord-compiler/resources
+      
+    - name: Install dependencies and compile code
       run: |
         cd nord-compiler
         npm install
-    - name: Copy Files to Nord Compiler
-      run: |
-        mkdir -p nord-compiler/resources
-        cp -R !(nord-compiler) nord-compiler/resources
-    - name: Compile Nord
-      run: |
-        cd nord-compiler
         node index.js
-    - name: Archive Compiled Files
+        
+    - name: Archive compiled code
       uses: actions/upload-artifact@v2
       with:
-        name: compiled
-        path: nord-compiler/compiled
-    - name: Create Release
+        name: compiled-code
+        path: nord-compiler/compiled.zip
+    
+    - name: Create release
       id: create_release
-      uses: actions/create-release@v1.1.4
+      uses: actions/create-release@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: v${{ github.run_number }}
         release_name: Release v${{ github.run_number }}
-        body: This is an automated release.
+        body: |
+          Compiled code for release v${{ github.run_number }}
         draft: false
         prerelease: false
-    - name: Attach Compiled Files to Release
-      id: upload-release-asset
+        
+    - name: Upload artifact to release
       uses: actions/upload-release-asset@v1.0.2
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
