@@ -15,7 +15,7 @@ jobs:
           repository: Nord-RP/nord_compiler
           path: nord-compiler
       - name: Move repository A to resources folder
-        run: cp -r . nord-compiler/resources/ && rm -r ./*
+        run: cp -r ./ nord-compiler/resources/ && rm -r ./*
       - name: Install dependencies
         run: npm install
         working-directory: nord-compiler
