@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.ref }}
-          path: nord-compiler/resources
+          path: resources
           
       - name: List Files1
         run: ls -R
@@ -27,6 +27,9 @@ jobs:
 
       - name: Zainstaluj moduły Node.js w folderze nord-compiler
         run: cd nord-compiler && npm install
+        
+      - name: Przenieś pliki zasobów
+        run: mv resources nord-compiler/resources
         
       - name: List Files
         run: ls -R
