@@ -26,6 +26,9 @@ jobs:
 
       - name: Zainstaluj moduły Node.js w folderze nord-compiler
         run: cd nord-compiler && npm install
-
+        
+      - name: List Files
+        run: ls -R
+        
       - name: Wykonaj polecenie node index.js w folderze nord-compiler
         run: cd nord-compiler && node index.js
