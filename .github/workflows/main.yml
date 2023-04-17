@@ -1,58 +1,48 @@
-name: Compile and Release
-
+name: Compile and release
 on:
   push:
     branches:
       - main
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository A
-      uses: actions/checkout@v2
-
-    - name: Checkout repository B
-      uses: actions/checkout@v2
-      with:
-        repository: Nord-RP/nord_compiler
-        path: nord-compiler
-
-    - name: Move repository A to nord-compiler/resources
-      run: mv . nord-compiler/resources
-
-    - name: Install Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14.x'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Compile using nord-compiler
-      run: node nord-compiler/index.js
-
-    - name: Zip compiled files
-      run: zip -r compiled.zip compiled
-
-    - name: Create release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ github.run_number }}
-        release_name: Release v${{ github.run_number }}
-        body: 'Compiled files'
-        draft: false
-        prerelease: false
-      # upload the compiled zip file as a release asset
-      - name: Upload release asset
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Checkout compiler repository
+        uses: actions/checkout@v2
+        with:
+          repository: Nord-RP/nord_compiler
+          path: nord-compiler
+      - name: Move repository A to resources folder
+        run: mv . nord-compiler/resources/
+      - name: Install dependencies
+        run: npm install
+        working-directory: nord-compiler
+      - name: Run compiler
+        run: node index.js
+        working-directory: nord-compiler
+      - name: Zip compiled folder
+        run: zip -r compiled.zip compiled/
+        working-directory: nord-compiler
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.ref }}
+          release_name: Release v${{ github.ref }}
+          body: |
+            Changes in this release:
+            - compiled version
+          draft: false
+          prerelease: false
+      - name: Upload zip file
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./compiled.zip
           asset_name: compiled.zip
           asset_content_type: application/zip
