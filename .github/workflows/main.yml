@@ -3,10 +3,6 @@ name: Nord Compiler
 on:
   push:
     branches: [ main ]
-    paths:
-      - '**.lua'
-      - '**.js'
-      - '**.json'
 
 jobs:
   build-and-release:
