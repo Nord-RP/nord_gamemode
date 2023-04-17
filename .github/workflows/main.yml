@@ -1,4 +1,4 @@
-name: Copy and compile
+name: Release
 
 on:
   push:
@@ -6,40 +6,41 @@ on:
       - main
 
 jobs:
-  copy-and-compile:
+  build_and_release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository A
+      - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Checkout Repository B
-        uses: actions/checkout@v2
+
+      - name: Copy repo to resources
+        uses: actions/upload-artifact@v2
         with:
-          repository: Nord-RP/nord_compiler
-          path: resources
-      - name: Setup Node.js
-        uses: actions/setup-node@v2.4.0
+          name: nord_gamemode
+          path: .
+
+      - name: Download repo
+        uses: actions/download-artifact@v2
         with:
-          node-version: '14.x'
-      - name: Install Dependencies
-        run: npm ci
-        working-directory: resources
-      - name: Compile Resources
-        run: node index.js
-        working-directory: resources
-      - name: Zip Compiled Resources
-        run: zip -r compiled.zip compiled
-        working-directory: resources
-      - name: Create Release
-        uses: actions/create-release@v1.0.7
+          name: nord_gamemode
+          path: ./nord_compiler/resources/
+
+      - name: Install dependencies
+        run: cd ./nord_compiler && npm install
+
+      - name: Build
+        run: cd ./nord_compiler && node index.js
+
+      - name: Archive compiled folder
+        uses: montudor/action-zip@v0.3.0
+        with:
+          args: -r compiled.zip ./nord_compiler/compiled
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          files: compiled.zip
           tag_name: v${{ github.ref }}
-          release_name: Release v${{ github.ref }}
-          body: 'Compiled resources for version ${{ github.ref }}.'
-          draft: false
-          prerelease: false
-          target_commitish: ${{ github.sha }}
-          assets:
-            - name: compiled.zip
-              path: resources/compiled.zip
+          body: |
+            Release notes go here.
