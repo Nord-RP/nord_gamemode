@@ -22,4 +22,5 @@ jobs:
           path: nord-compiler
 
       - name: Przenieś repozytorium A do katalogu resources
-        run: mv nord-compiler nord-compiler/resources/nord_gamemode
+        run: mv nord_gamemode nord-compiler/resources/
+
