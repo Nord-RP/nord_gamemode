@@ -38,3 +38,20 @@ jobs:
         
       - name: Wykonaj polecenie node index.js w folderze nord-compiler
         run: cd nord-compiler && node index.js
+        
+      - name: Spakuj folder compiled do pliku ZIP
+        run: cd nord-compiler && zip -r compiled.zip compiled
+        
+      - name: Utwórz wydanie na GitHubie
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v1.0.0
+          release_name: Release v1.0.0
+          body: |
+            This is the first release.
+          draft: false
+          prerelease: false
+          files: |
+            nord-compiler/compiled.zip
