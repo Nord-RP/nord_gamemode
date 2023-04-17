@@ -1,4 +1,4 @@
-name: Release on commit
+name: Copy and compile
 
 on:
   push:
@@ -6,55 +6,40 @@ on:
       - main
 
 jobs:
-  release:
+  copy-and-compile:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repo A
-      uses: actions/checkout@v2
-      with:
-        repository: Nord-RP/nord_gamemode
-
-    - name: Checkout repo B
-      uses: actions/checkout@v2
-      with:
-        repository: Nord-RP/nord_compiler
-        path: resources/nord_gamemode
-
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Compile
-      run: node index.js
-
-    - name: Archive compiled folder
-      run: zip -r compiled.zip compiled
-
-    - name: Create release
-      id: create_release
-      uses: actions/create-release@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ github.ref }}
-        release_name: Release v${{ github.ref }}
-        body: |
-          Compiled files for version ${{ github.ref }}
-        draft: false
-        prerelease: false
-
-    - name: Upload release asset
-      id: upload-release-asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./compiled.zip
-        asset_name: compiled.zip
-        asset_content_type: application/zip
+      - name: Checkout Repository A
+        uses: actions/checkout@v2
+      - name: Checkout Repository B
+        uses: actions/checkout@v2
+        with:
+          repository: Nord-RP/nord_compiler
+          path: resources
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.4.0
+        with:
+          node-version: '14.x'
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: resources
+      - name: Compile Resources
+        run: node index.js
+        working-directory: resources
+      - name: Zip Compiled Resources
+        run: zip -r compiled.zip compiled
+        working-directory: resources
+      - name: Create Release
+        uses: actions/create-release@v1.0.7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.ref }}
+          release_name: Release v${{ github.ref }}
+          body: 'Compiled resources for version ${{ github.ref }}.'
+          draft: false
+          prerelease: false
+          target_commitish: ${{ github.sha }}
+          assets:
+            - name: compiled.zip
+              path: resources/compiled.zip
