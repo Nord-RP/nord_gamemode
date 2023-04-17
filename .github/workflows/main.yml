@@ -53,8 +53,8 @@ jobs:
       - name: Create Release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ steps.release_version.outputs.release_version }}
-          release_name: ${{ steps.release_version.outputs.release_version }}
+          tag_name: ${{ github.run_number }}
+          release_name: ${{ github.run_number }}
           draft: false
           prerelease: false
         env:
