@@ -29,8 +29,10 @@ jobs:
         run: cd nord-compiler && npm install
         
       - name: Przenieś pliki zasobów
-        run: mv resources nord-compiler/resources && rm nord-compiler/resources/README.md && rm -rf nord-compiler/resources/.github  && rm -rf nord-compiler/resources/.git && mkdir -p nord-compiler/compiled/resources/[BAZA] && mv nord-compiler/resources/[BAZA] $_
+        run: mv resources nord-compiler/resources && rm nord-compiler/resources/README.md && rm -rf nord-compiler/resources/.github  && rm -rf nord-compiler/resources/.git
         
+      - name: Przenieś pliki konfiguracyjne
+        run: mkdir -p nord-compiler/compiled/resources/[BAZA] && mv nord-compiler/resources/[BAZA] $_ && mkdir -p nord-compiler/compiled/resources/[CONFIGS] && mv nord-compiler/resources/[CONFIGS] $_
       - name: List Files
         run: ls -R
         
