@@ -6,19 +6,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 'latest'
-        
     - name: Checkout repository B
       uses: actions/checkout@v2
       with:
         repository: Nord-RP/nord_compiler
         path: nord-compiler
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v2.4.0
+      with:
+        node-version: '16'
     
     - name: Copy files to nord-compiler/resources
       run: cp -r !(nord-compiler) nord-compiler/resources
@@ -49,11 +49,3 @@ jobs:
         prerelease: false
         
     - name: Upload artifact to release
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: nord-compiler/compiled.zip
-        asset_name: compiled.zip
-        asset_content_type: application/zip
