@@ -17,7 +17,11 @@ jobs:
           path: 'nord-compiler'
 
       - name: Copy files to Nord Compiler
-        run: cp -R !(nord-compiler) nord-compiler/resources/
+        run: |
+          shopt -s extglob
+          cp -R !(nord-compiler) nord-compiler/resources/
+        shell: bash
+
 
       - name: Install dependencies
         run: |
