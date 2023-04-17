@@ -42,6 +42,22 @@ jobs:
       - name: Spakuj folder compiled do pliku ZIP
         run: cd nord-compiler && zip -r compiled.zip compiled
         
+      - name: Get latest tag
+        id: tag
+        run: echo ::set-output name=latest_tag::$(git describe --abbrev=0 --tags)
+
+      - name: Set release version
+        id: release_version
+        run: echo ::set-output name=release_version::${{ steps.tag.outputs.latest_tag }}
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.release_version.outputs.release_version }}
+          release_name: ${{ steps.release_version.outputs.release_version }}
+          draft: false
+          prerelease: false
+        
       - name: Przesyłanie paczki skompilowanych plików
         uses: actions/upload-release-asset@v1
         with:
