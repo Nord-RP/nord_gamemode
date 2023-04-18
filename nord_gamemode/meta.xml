@@ -19,9 +19,18 @@
   <file src="login/files/img/checkbox.png"/>
   <file src="login/files/img/checkbox_active.png"/>
   <file src="login/files/img/checkbox_hover.png"/>
+  <file src="login/files/img/character_select_bg.png"/>
+  <file src="login/files/img/character_select_box.png"/>
+  <file src="login/files/img/slider_box_bg.png"/>
+  <file src="login/files/img/slider_bg_1.png"/>
+  <file src="login/files/img/slider_bg_2.png"/>
+  <file src="login/files/img/slider_bg_3.png"/>
+  <file src="login/files/img/slider_fill.png"/>
   <file src="login/files/fonts/Roboto-Medium.ttf"/>
   <file src="login/files/fonts/Roboto-Regular.ttf"/>
   <file src="login/files/fonts/Roboto-Bold.ttf"/>
+  <file src="login/files/fonts/Poppins-Regular.ttf"/>
+  <file src="login/files/fonts/Poppins-Medium.ttf"/>
   <file src="login/files/sounds/bg_music.mp3"/>
   <oop>true</oop>
 </meta>

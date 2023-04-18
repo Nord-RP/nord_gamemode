@@ -13,19 +13,21 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
     showChat(false);
     showCursor(true);
     setPlayerHudComponentVisible("all", false);
-    local file = XML.load("@:nord_gamemode/remember_me.xml")
-    local remember = file:findChild("remember", 0)
-    if(remember:getValue() == "true") then
-        loginNode = file:findChild("name", 0)
-        passLenNode = file:findChild("hiddenData", 0)
-        tokenNode = file:findChild("token", 0)
-        login = loginNode:getValue()
-        passLen = passLenNode:getValue()
-        token = tokenNode:getValue()
-        file:unload()
-        remembered = true
-        for i = 0, passLen, 1 do
-            fakePass = fakePass.."*"
+    local file = (File.exists('@:nord_gamemode/remember_me.xml') and XML.load("@:nord_gamemode/remember_me.xml") or false)
+    if (file) then 
+        local remember = file:findChild("remember", 0)
+        if(remember:getValue() == "true") then
+            loginNode = file:findChild("name", 0)
+            passLenNode = file:findChild("hiddenData", 0)
+            tokenNode = file:findChild("token", 0)
+            login = loginNode:getValue()
+            passLen = passLenNode:getValue()
+            token = tokenNode:getValue()
+            file:unload()
+            remembered = true
+            for i = 0, passLen, 1 do
+                fakePass = fakePass.."*"
+            end
         end
     end
 
@@ -107,7 +109,6 @@ end
 addEvent("onClientLoginRequest", true)
 addEventHandler("onClientLoginRequest", getRootElement(), function(status, characters, token)
     if not(status) then return end
-    print(token)
     if token then
         local file = XML( "@:nord_gamemode/remember_me.xml", "root")
         local rememberNode = file:createChild("remember")

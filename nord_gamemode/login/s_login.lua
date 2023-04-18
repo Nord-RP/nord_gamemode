@@ -38,6 +38,7 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
         else
             print("Found characters")
             triggerClientEvent(plr, "onClientLoginRequest", plr, true, characters, authToken)
+            exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
         end
         return
     end
@@ -76,6 +77,7 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
             else
                 print("Found characters")
                 triggerClientEvent(plr, "onClientLoginRequest", plr, true, characters, authToken)
+                exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
             end
         end
     end)

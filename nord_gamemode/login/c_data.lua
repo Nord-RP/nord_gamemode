@@ -12,21 +12,38 @@ LOGIN_GUI.txt = {
     ["checkbox"] = dxCreateTexture("login/files/img/checkbox.png", "argb", true, "wrap"),
     ["checkbox_active"] = dxCreateTexture("login/files/img/checkbox_active.png", "argb", true, "wrap"),
     ["checkbox_hover"] = dxCreateTexture("login/files/img/checkbox_hover.png", "argb", true, "wrap"),
+    ["select_bg"] = dxCreateTexture("login/files/img/character_select_bg.png", "argb", true, "wrap"),
+    ["select_box"] = dxCreateTexture("login/files/img/character_select_box.png", "argb", true, "wrap"),
+    ["slider_box"] = dxCreateTexture("login/files/img/slider_box_bg.png", "argb", true, "wrap"),
+    ["slider_bg3"] = dxCreateTexture("login/files/img/slider_bg_1.png", "argb", true, "wrap"),
+    ["slider_bg2"] = dxCreateTexture("login/files/img/slider_bg_2.png", "argb", true, "wrap"),
+    ["slider_bg1"] = dxCreateTexture("login/files/img/slider_bg_3.png", "argb", true, "wrap"),
+    ["slider_fill"] = dxCreateTexture("login/files/img/slider_fill.png", "argb", true, "wrap"),
 }
 
 LOGIN_GUI.scale = {
-    ["panel_bg"] = {w=1466/zoom, h=744/zoom},
-    ["edit"] = {w=535/zoom, h=50/zoom},
-    ["button"] = {w=535/zoom, h=70/zoom},
-    ["checkbox"] = {w=18/zoom, h=18/zoom},
+    ["panel_bg"] = {w= 1466/zoom, h= 744/zoom},
+    ["edit"] = {w= 535/zoom, h= 50/zoom},
+    ["button"] = {w= 535/zoom, h= 70/zoom},
+    ["checkbox"] = {w= 18/zoom, h= 18/zoom},
+    ["select_bg"] = {w= 1920/zoom, h= 449/zoom},
+    ["select_box"] = {w= 281/zoom, h= 175/zoom},
+    ["slider_box"] = {w= 364/zoom, h= 47/zoom},
+    ["slider"] = {w= 223/zoom, h= 12/zoom},
 }
 
 LOGIN_GUI.pos = {
-    ["panel_bg"] = {x=sW/2-LOGIN_GUI.scale.panel_bg.w/2, y = sH/2-LOGIN_GUI.scale.panel_bg.h/2},
-    ["edit_login"] = {x=882/zoom, y = 297/zoom},
-    ["edit_password"] = {x=882/zoom, y = 399/zoom},
-    ["checkbox"] = {x=882/zoom, y = 470/zoom},
-    ["button"] = {x=882/zoom, y = 519/zoom},
+    ["panel_bg"] = {x= sW/2-LOGIN_GUI.scale.panel_bg.w/2, y= sH/2-LOGIN_GUI.scale.panel_bg.h/2},
+    ["edit_login"] = {x= 882/zoom, y= 297/zoom},
+    ["edit_password"] = {x= 882/zoom, y= 399/zoom},
+    ["checkbox"] = {x= 882/zoom, y= 470/zoom},
+    ["button"] = {x= 882/zoom, y= 519/zoom},
+    ["select_bg"] = {x=0, y= sH-LOGIN_GUI.scale.select_bg.h},
+    ["select_box"] = {x=(106-18)/zoom, y=LOGIN_GUI.scale.select_bg.h-19/zoom-LOGIN_GUI.scale.select_box.h},
+    ["box_header_label"] = {x=(18+27)/zoom, y=(25+9)/zoom},
+    ["slider_box"] = {x=1313/zoom, y=LOGIN_GUI.scale.select_bg.h-34/zoom-LOGIN_GUI.scale.slider_box.h},
+    ["slider"] = {x=100/zoom, y=(47/zoom)/2-6/zoom},
+    ["slider_label"] = {x=(100/zoom)/2+7/zoom, y=(47/zoom)/2+2/zoom},
 }
 
 
@@ -34,6 +51,9 @@ LOGIN_GUI.fonts = {
     ["medium_20"] = dxCreateFont("login/files/fonts/Roboto-Medium.ttf", 20.83/zoom, false),
     ["regular_20"] = dxCreateFont("login/files/fonts/Roboto-Regular.ttf", 20.83/zoom, false),
     ["bold_14"] = dxCreateFont("login/files/fonts/Roboto-Bold.ttf", 14.37/zoom, false),
+    ["poppins_regular_22"] = dxCreateFont("login/files/fonts/Poppins-Regular.ttf", 22.95/zoom, false),
+    ["poppins_medium_37"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 37.56/zoom, false),
+    ["poppins_regular_14"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 14.78/zoom, false),
 }
 
 LOGIN_GUI.timers = {}
@@ -41,3 +61,5 @@ LOGIN_GUI.timers = {}
 LOGIN_GUI.vars = {}
 
 LOGIN_GUI.elements = {}
+LOGIN_GUI.elements.select_box = {}
+LOGIN_GUI.elements.slider_box = {}
