@@ -1,5 +1,5 @@
 <meta>
-  <info author="Allerek" type="script" name="nord_gamemode"/>
+  <info author="Allerek, bover" type="script" name="nord_gamemode"/>
   <script src="c_nord_gamemode.lua" type="client" cache="false"/>
   <script src="dbmanager.lua" type="server"/>
   <script src="s_nord_gamemode.lua" type="server"/>
@@ -12,6 +12,8 @@
 
   <script src="models/c_models.lua" type="client"/>
   <script src="s_models.lua" type="server"/>
+
+  <script src="hud/c_hud.lua" type="client" cache="false" />
 
 
   <file src="login/files/movie/bg_video.webm"/>
