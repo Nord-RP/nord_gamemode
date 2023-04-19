@@ -7,6 +7,7 @@
   <script src="login/c_data.lua" type="client"/>
   <script src="login/c_login.lua" type="client"/>
   <script src="login/c_login_character.lua" type="client"/>
+  <script src="models/c_models.lua" type="client"/>
   <script src="s_models.lua" type="server"/>
 
 
@@ -26,11 +27,20 @@
   <file src="login/files/img/slider_bg_2.png"/>
   <file src="login/files/img/slider_bg_3.png"/>
   <file src="login/files/img/slider_fill.png"/>
+  <file src="login/files/img/key_enter.png"/>
+  <file src="login/files/img/character_name_bg.png"/>
   <file src="login/files/fonts/Roboto-Medium.ttf"/>
   <file src="login/files/fonts/Roboto-Regular.ttf"/>
   <file src="login/files/fonts/Roboto-Bold.ttf"/>
   <file src="login/files/fonts/Poppins-Regular.ttf"/>
   <file src="login/files/fonts/Poppins-Medium.ttf"/>
+  <file src="login/files/fonts/Poppins-Light.ttf"/>
   <file src="login/files/sounds/bg_music.mp3"/>
+
+  <file src="models/mugsht.dff"/>
+  <file src="models/mugsht.col"/>
+  <file src="models/mugsht.txd"/>
+  <include resource="entityData"/>
+  <download_priority_group>0</download_priority_group>
   <oop>true</oop>
 </meta>

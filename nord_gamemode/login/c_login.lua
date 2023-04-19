@@ -10,8 +10,9 @@ local fakePass = ""
 
 addEventHandler("onClientResourceStart", resourceRoot, function()
     GUI = LOGIN_GUI
-    showChat(false);
-    showCursor(true);
+    Camera.fade(true)
+    showChat(false)
+    showCursor(true)
     setPlayerHudComponentVisible("all", false);
     local file = (File.exists('@:nord_gamemode/remember_me.xml') and XML.load("@:nord_gamemode/remember_me.xml") or false)
     if (file) then 
@@ -32,7 +33,7 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
     end
 
     if (not DEV_MODE) then
-        GUI.elements.sound = Sound("login/files/sounds/bg_music.mp3", true, false);
+        GUI.elements.sound = Sound("login/files/sounds/bg_music.mp3", true);
         GUI.elements.sound:setVolume(0.5);
     end
 
@@ -107,7 +108,7 @@ end
 
 
 addEvent("onClientLoginRequest", true)
-addEventHandler("onClientLoginRequest", getRootElement(), function(status, characters, token)
+addEventHandler("onClientLoginRequest", getRootElement(), function(status, errorCode, characters, token)
     if not(status) then return end
     if token then
         local file = XML( "@:nord_gamemode/remember_me.xml", "root")
@@ -130,9 +131,10 @@ addEventHandler("onClientLoginRequest", getRootElement(), function(status, chara
         file:saveFile()
         file:unload()
     end
+
     GUI.elements.browser_image:getElement():destroy()
     GUI.elements.browser:destroy()
-    Camera.fade(true)
+
     displayCharacterSelection(characters)
 end)
 

@@ -21,7 +21,7 @@
 	<script src="test/STest.lua" type="server"/>
 	<script src="test/CTest.lua" type="client"/>
  -->
-
+ 	<download_priority_group>100</download_priority_group>
 	<settings>
 		<setting name="*entityDataSync" value="[false,true]" friendlyname="entityDataSync" group="Main" accept="true,false" desc="This option synchronizes the client with the server when enabled, we do not recommend enabling it, you do it at your own risk as people using lua executor can easily change server side data with this option."/>
 	</settings>

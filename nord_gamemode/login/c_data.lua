@@ -19,6 +19,8 @@ LOGIN_GUI.txt = {
     ["slider_bg2"] = dxCreateTexture("login/files/img/slider_bg_2.png", "argb", true, "wrap"),
     ["slider_bg1"] = dxCreateTexture("login/files/img/slider_bg_3.png", "argb", true, "wrap"),
     ["slider_fill"] = dxCreateTexture("login/files/img/slider_fill.png", "argb", true, "wrap"),
+    ["key_enter"] = dxCreateTexture("login/files/img/key_enter.png", "argb", true, "wrap"),
+    ["character_name"] = dxCreateTexture("login/files/img/character_name_bg.png", "argb", true, "wrap"),
 }
 
 LOGIN_GUI.scale = {
@@ -30,6 +32,8 @@ LOGIN_GUI.scale = {
     ["select_box"] = {w= 281/zoom, h= 175/zoom},
     ["slider_box"] = {w= 364/zoom, h= 47/zoom},
     ["slider"] = {w= 223/zoom, h= 12/zoom},
+    ["key_enter"] = {w= 126/zoom, h= 126/zoom},
+    ["character_name"] = {w= 233/zoom*2, h= 83/zoom*2},
 }
 
 LOGIN_GUI.pos = {
@@ -44,6 +48,7 @@ LOGIN_GUI.pos = {
     ["slider_box"] = {x=1313/zoom, y=LOGIN_GUI.scale.select_bg.h-34/zoom-LOGIN_GUI.scale.slider_box.h},
     ["slider"] = {x=100/zoom, y=(47/zoom)/2-6/zoom},
     ["slider_label"] = {x=(100/zoom)/2+7/zoom, y=(47/zoom)/2+2/zoom},
+    ["key_enter"] = {x=LOGIN_GUI.scale.select_bg.w-LOGIN_GUI.scale.key_enter.w-50/zoom, y=LOGIN_GUI.scale.select_bg.h-50/zoom-LOGIN_GUI.scale.key_enter.h},
 }
 
 
@@ -53,7 +58,10 @@ LOGIN_GUI.fonts = {
     ["bold_14"] = dxCreateFont("login/files/fonts/Roboto-Bold.ttf", 14.37/zoom, false),
     ["poppins_regular_22"] = dxCreateFont("login/files/fonts/Poppins-Regular.ttf", 22.95/zoom, false),
     ["poppins_medium_37"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 37.56/zoom, false),
+    ["poppins_medium_32"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 31.95/zoom*1.7, false),
     ["poppins_regular_14"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 14.78/zoom, false),
+    ["poppins_light_15"] = dxCreateFont("login/files/fonts/Poppins-Light.ttf", 15.77/zoom, false),
+    ["poppins_light_18"] = dxCreateFont("login/files/fonts/Poppins-Light.ttf", 18.34/zoom*1.7, false),
 }
 
 LOGIN_GUI.timers = {}
@@ -63,3 +71,4 @@ LOGIN_GUI.vars = {}
 LOGIN_GUI.elements = {}
 LOGIN_GUI.elements.select_box = {}
 LOGIN_GUI.elements.slider_box = {}
+LOGIN_GUI.elements.ch_name = {}

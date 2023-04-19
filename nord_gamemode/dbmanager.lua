@@ -237,7 +237,7 @@ local crud = {
 
             local result, numAffectedRows, lastInsertId  = dbPoll(dbQuery(self.db:getConnection(), prepareQuery), -1)
             self.datas = (#result > 0) and formatTblFromDB(result) or {}
-            outputDebugString(DEBUG_RUNNING_DEFAULT .. querySelect)
+            --outputDebugString(DEBUG_RUNNING_DEFAULT .. querySelect)
 
             return result, numAffectedRows, lastInsertId
         end)
@@ -279,7 +279,7 @@ local crud = {
 
         self.datas[#self.datas + 1] = data
 
-        outputDebugString('DB Manager RUNNING: ' .. query)
+        --outputDebugString('DB Manager RUNNING: ' .. query)
         return data
     end,
 
