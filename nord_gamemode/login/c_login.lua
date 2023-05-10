@@ -9,6 +9,7 @@ local token = false
 local fakePass = ""
 
 addEventHandler("onClientResourceStart", resourceRoot, function()
+    if (exports.entityData:getEntityData(localPlayer, "ch-id")) then return end
     GUI = LOGIN_GUI
     Camera.fade(true)
     showChat(false)

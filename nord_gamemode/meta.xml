@@ -7,11 +7,15 @@
   <script src="login/c_data.lua" type="client"/>
   <script src="login/c_login.lua" type="client"/>
   <script src="login/c_login_character.lua" type="client"/>
+
+
+
   <script src="models/c_models.lua" type="client"/>
   <script src="s_models.lua" type="server"/>
 
 
   <file src="login/files/movie/bg_video.webm"/>
+
   <file src="login/files/img/bg.png"/>
   <file src="login/files/img/editbox.png"/>
   <file src="login/files/img/editbox_active.png"/>
@@ -29,18 +33,22 @@
   <file src="login/files/img/slider_fill.png"/>
   <file src="login/files/img/key_enter.png"/>
   <file src="login/files/img/character_name_bg.png"/>
+  
   <file src="login/files/fonts/Roboto-Medium.ttf"/>
   <file src="login/files/fonts/Roboto-Regular.ttf"/>
   <file src="login/files/fonts/Roboto-Bold.ttf"/>
   <file src="login/files/fonts/Poppins-Regular.ttf"/>
   <file src="login/files/fonts/Poppins-Medium.ttf"/>
   <file src="login/files/fonts/Poppins-Light.ttf"/>
+
   <file src="login/files/sounds/bg_music.mp3"/>
+
 
   <file src="models/mugsht.dff"/>
   <file src="models/mugsht.col"/>
   <file src="models/mugsht.txd"/>
   <include resource="entityData"/>
   <download_priority_group>0</download_priority_group>
+  <min_mta_version server="1.5.2-9.07903" client="1.5.2-9.07903" />
   <oop>true</oop>
 </meta>

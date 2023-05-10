@@ -92,14 +92,11 @@ end)
 
 addEventHandler("onPlayerQuit", getRootElement(), function()
     local name = exports.entityData:getEntityData(source, "username")
-    print(name)
     if name then
         onlinePlayers[name] = nil
         local characterData = exports.entityData:getEntityData(source, "ch-id")
-        print("test2")
         iprint(characterData)
         if characterData then
-            print("test")
             charactersModel:update({online=0}, {
                 where={
                     id=characterData
@@ -124,7 +121,6 @@ addEventHandler("onCharacterSelection", resourceRoot, function(characterId)
     exports.entityData:setEntityData(client, "ch-sex", character.sex)
     exports.entityData:setEntityData(client, "ch-strength", character.strength)
     exports.entityData:setEntityData(client, "ch-psyche", character.psyche)
-    print(character.health)
     charactersModel:update({online=1}, {
         where={
             id=characterId
