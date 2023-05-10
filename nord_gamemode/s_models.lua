@@ -9,6 +9,9 @@ forumAccountsModel = DBConn:define("ips_core_members", {
     },
     members_pass_hash={
         type = DBManager.STRING(255),
+    },    
+    pp_reputation_points={
+        type = DBManager.INT(11),
     },
 })
 
@@ -26,6 +29,12 @@ charactersModel = DBConn:define("mta_characters", {
     },
     surname={
         type = DBManager.STRING(30),
+    },
+    money={
+        type = DBManager.INT(11),
+    },
+    bank_money={
+        type = DBManager.INT(11),
     },
     skin={
         type = DBManager.INT(11),
@@ -47,7 +56,16 @@ charactersModel = DBConn:define("mta_characters", {
     },
     age={
         type = DBManager.INT(11),
-    }
+    },
+    health={
+        type = DBManager.INT(11),
+    },
+    psyche={
+        type = DBManager.INT(11),
+    },
+    strength={
+        type = DBManager.INT(11),
+    },
 })
 
 authTokenModel = DBConn:define("mta_auth_token", {
