@@ -45,6 +45,12 @@
 
   <file src="login/files/sounds/bg_music.mp3"/>
 
+  <file src="radar/files/img/radar_mask.png"/>
+  <file src="radar/files/img/radar_bg.png"/>
+  <file src="radar/files/img/player.png"/>
+  <file src="radar/files/img/map.svg"/>
+  <file src="radar/files/shaders/hud_mask.fx"/>
+  <file src="radar/files/shaders/include/tex_matrix.fx"/>
 
   <file src="models/mugsht.dff"/>
   <file src="models/mugsht.col"/>
