@@ -24,6 +24,7 @@
         <object name="resource.webadmin"></object>
         <object name="resource.acpanel"></object>
         <object name="resource.dgs"></object>
+        <object name="resource.entityData"></object>
         <object name="user.Allerek"></object>
     </group>
     <group name="Console">
@@ -54,6 +55,10 @@
     <group name="autoGroup_dgs">
         <acl name="autoACL_dgs"></acl>
         <object name="resource.dgs"></object>
+    </group>
+    <group name="autoGroup_pAttach">
+        <acl name="autoACL_pAttach"></acl>
+        <object name="resource.pAttach"></object>
     </group>
     <acl name="Default">
         <right name="general.ModifyOtherObjects" access="false"></right>
@@ -814,5 +819,8 @@
     <acl name="autoACL_dgs">
         <right name="function.fetchRemote" access="false" who="" pending="true" date=""></right>
         <right name="general.ModifyOtherObjects" access="false" who="" pending="true" date=""></right>
+    </acl>
+    <acl name="autoACL_pAttach">
+        <right name="function.fetchRemote" access="false" who="" pending="true" date=""></right>
     </acl>
 </acl>

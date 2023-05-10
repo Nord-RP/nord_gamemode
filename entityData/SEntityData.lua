@@ -394,6 +394,7 @@ addEventHandler("onSettingChange", root, makeSettingsChangesVisible)
 function storageEntityData()
 		if eventName == "onResourceStop" then
 				setElementData(root, "EntityData", {entityData.type, entityData.flag}, false)
+				startResource(getResourceFromName("nord_gamemode"), true)
 		elseif eventName == "onResourceStart" then
 				local download = getElementData(root, "EntityData")
 				if type(download) == "table" then

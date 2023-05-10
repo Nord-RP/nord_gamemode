@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Czas generowania: 14 Kwi 2023, 00:44
+-- Czas generowania: 20 Kwi 2023, 14:22
 -- Wersja serwera: 10.10.2-MariaDB
 -- Wersja PHP: 8.0.26
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `mta_auth_token` (
 --
 
 INSERT INTO `mta_auth_token` (`id`, `token`, `created_at`, `updated_at`) VALUES
-(1, 's0LZYJDFQBLGn1wm3i0fSDo64yUuPGTJZb3NpPydGzy5JDbM0h4yh4Eex4uSZwFlH3W3D68AXutDP4lsjNv8igD0te8pNHCDJhvG', '2023-04-12 21:17:26', '2023-04-12 21:17:26');
+(1, '5WwcjLoQFFB52QLTZlQI2DOZ5Mbhba73FAsAvT0PlbAXvkTZcWhkpdQs5ylgikClxXbWLrOrsOMn49wxntG4n9HNarlAALi9gQzA', '2023-04-12 21:17:26', '2023-04-12 21:17:26');
 
 -- --------------------------------------------------------
 
@@ -57,6 +57,11 @@ CREATE TABLE IF NOT EXISTS `mta_characters` (
   `surname` varchar(30) DEFAULT NULL,
   `age` int(11) DEFAULT NULL,
   `sex` int(1) DEFAULT NULL,
+  `money` int(11) NOT NULL DEFAULT 20000,
+  `bank_money` int(11) NOT NULL DEFAULT 0,
+  `health` int(11) NOT NULL DEFAULT 0,
+  `psyche` int(11) NOT NULL DEFAULT 0,
+  `strength` int(11) NOT NULL DEFAULT 0,
   `skin` int(11) DEFAULT NULL,
   `online` int(1) DEFAULT NULL,
   `blocked` int(1) DEFAULT NULL,
@@ -71,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `mta_characters` (
 -- Zrzut danych tabeli `mta_characters`
 --
 
-INSERT INTO `mta_characters` (`id`, `owner_id`, `name`, `surname`, `age`, `sex`, `skin`, `online`, `blocked`, `hidden`, `playtime`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Jeff', 'Block', 21, 2, 1, 0, 0, 0, 0, '2023-04-12 20:36:11', '2023-04-12 20:36:11'),
-(2, 1, 'chuj', 'chujowy', 2, 1, 16, 0, 0, 0, 0, '2023-04-14 01:15:16', '2023-04-14 01:15:16'),
-(3, 1, 'chuj', 'chujowszy', 2, 1, 14, 0, 0, 0, 0, '2023-04-14 01:15:16', '2023-04-14 01:15:16');
+INSERT INTO `mta_characters` (`id`, `owner_id`, `name`, `surname`, `age`, `sex`, `money`, `bank_money`, `health`, `psyche`, `strength`, `skin`, `online`, `blocked`, `hidden`, `playtime`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Jeff', 'Block', 21, 2, 20000, 53000, 75, 50, 25, 1, 1, 0, 0, 5400000, '2023-04-12 20:36:11', '2023-04-12 20:36:11'),
+(2, 1, 'Tyler', 'Johnson', 2, 1, 20000, 0, 0, 0, 0, 16, 0, 1, 0, 0, '2023-04-14 01:15:16', '2023-04-14 01:15:16'),
+(3, 1, 'Ethan', 'Davis', 2, 1, 20000, 0, 0, 0, 0, 14, 0, 0, 0, 0, '2023-04-14 01:15:16', '2023-04-14 01:15:16');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
