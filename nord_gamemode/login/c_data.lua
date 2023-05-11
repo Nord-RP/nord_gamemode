@@ -51,17 +51,16 @@ LOGIN_GUI.pos = {
     ["key_enter"] = {x=LOGIN_GUI.scale.select_bg.w-LOGIN_GUI.scale.key_enter.w-50/zoom, y=LOGIN_GUI.scale.select_bg.h-50/zoom-LOGIN_GUI.scale.key_enter.h},
 }
 
-
 LOGIN_GUI.fonts = {
-    ["medium_20"] = dxCreateFont("login/files/fonts/Roboto-Medium.ttf", 20.83/zoom, false),
-    ["regular_20"] = dxCreateFont("login/files/fonts/Roboto-Regular.ttf", 20.83/zoom, false),
-    ["bold_14"] = dxCreateFont("login/files/fonts/Roboto-Bold.ttf", 14.37/zoom, false),
-    ["poppins_regular_22"] = dxCreateFont("login/files/fonts/Poppins-Regular.ttf", 22.95/zoom, false),
-    ["poppins_medium_37"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 37.56/zoom, false),
-    ["poppins_medium_32"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 31.95/zoom*1.7, false),
-    ["poppins_regular_14"] = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 14.78/zoom, false),
-    ["poppins_light_15"] = dxCreateFont("login/files/fonts/Poppins-Light.ttf", 15.77/zoom, false),
-    ["poppins_light_18"] = dxCreateFont("login/files/fonts/Poppins-Light.ttf", 18.34/zoom*1.7, false),
+    ["medium_20"] = dxCreateFont("resources/fonts/Roboto-Medium.ttf", 20.83/zoom, false),
+    ["regular_20"] = dxCreateFont("resources/fonts/Roboto-Regular.ttf", 20.83/zoom, false),
+    ["bold_14"] = dxCreateFont("resources/fonts/Roboto-Bold.ttf", 14.37/zoom, false),
+    ["poppins_regular_22"] = dxCreateFont("resources/fonts/Poppins-Regular.ttf", 22.95/zoom, false),
+    ["poppins_medium_37"] = dxCreateFont("resources/fonts/Poppins-Medium.ttf", 37.56/zoom, false),
+    ["poppins_medium_32"] = dxCreateFont("resources/fonts/Poppins-Medium.ttf", 31.95/zoom*1.7, false),
+    ["poppins_regular_14"] = dxCreateFont("resources/fonts/Poppins-Medium.ttf", 14.78/zoom, false),
+    ["poppins_light_15"] = dxCreateFont("resources/fonts/Poppins-Light.ttf", 15.77/zoom, false),
+    ["poppins_light_18"] = dxCreateFont("resources/fonts/Poppins-Light.ttf", 18.34/zoom*1.7, false),
 }
 
 LOGIN_GUI.timers = {}

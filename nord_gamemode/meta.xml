@@ -3,18 +3,12 @@
   <script src="c_nord_gamemode.lua" type="client" cache="false"/>
   <script src="dbmanager.lua" type="server"/>
   <script src="s_nord_gamemode.lua" type="server"/>
+
+  <!-- Login -->
   <script src="login/s_login.lua" type="server"/>
   <script src="login/c_data.lua" type="client"/>
   <script src="login/c_login.lua" type="client"/>
   <script src="login/c_login_character.lua" type="client"/>
-
-
-
-  <script src="models/c_models.lua" type="client"/>
-  <script src="s_models.lua" type="server"/>
-
-  <script src="hud/c_hud.lua" type="client" cache="false" />
-
 
   <file src="login/files/movie/bg_video.webm"/>
 
@@ -36,14 +30,18 @@
   <file src="login/files/img/key_enter.png"/>
   <file src="login/files/img/character_name_bg.png"/>
   
-  <file src="login/files/fonts/Roboto-Medium.ttf"/>
-  <file src="login/files/fonts/Roboto-Regular.ttf"/>
-  <file src="login/files/fonts/Roboto-Bold.ttf"/>
-  <file src="login/files/fonts/Poppins-Regular.ttf"/>
-  <file src="login/files/fonts/Poppins-Medium.ttf"/>
-  <file src="login/files/fonts/Poppins-Light.ttf"/>
+  <file src="resources/fonts/Roboto-Medium.ttf"/>
+  <file src="resources/fonts/Roboto-Regular.ttf"/>
+  <file src="resources/fonts/Roboto-Bold.ttf"/>
+  <file src="resources/fonts/Poppins-Regular.ttf"/>
+  <file src="resources/fonts/Poppins-Medium.ttf"/>
+  <file src="resources/fonts/Poppins-Light.ttf"/>
 
   <file src="login/files/sounds/bg_music.mp3"/>
+
+  <!-- HUD/RADAR -->
+  <script src="radar/c_data.lua" type="client"/>
+  <script src="radar/c_radar.lua" type="client"/>
 
   <file src="radar/files/img/radar_mask.png"/>
   <file src="radar/files/img/radar_bg.png"/>
@@ -51,6 +49,12 @@
   <file src="radar/files/img/map.svg"/>
   <file src="radar/files/shaders/hud_mask.fx"/>
   <file src="radar/files/shaders/include/tex_matrix.fx"/>
+  <file src="radar/files/img/top_bar.png"/>
+  <file src="radar/files/img/bottom_bar.png"/>
+
+  <!--  -->
+  <script src="models/c_models.lua" type="client"/>
+  <script src="s_models.lua" type="server"/>
 
   <file src="models/mugsht.dff"/>
   <file src="models/mugsht.col"/>
