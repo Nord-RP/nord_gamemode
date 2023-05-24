@@ -10,36 +10,33 @@ local onlinePlayers = {}
 
 addEvent("onLoginRequest", true)
 addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, token)
-    print("SName: "..name)
+    iprint(remember)
     forumAccountsModel:sync()
     authTokenModel:sync()
     local user = forumAccountsModel:findOne({where = {name = name}})
-    if (not user) then
-        error("User not found!")
-    else
-        print("The name of user is: "..user.name)
-    end
-    local authToken = authTokenModel:findByPk(user.member_id)
+    local authToken = authTokenModel:findOne({where = {member_id = user.member_id}})
     local plr = client
     if(onlinePlayers[user.name]) then 
         triggerClientEvent(plr, "onClientLoginRequest", plr, false, "user_logged")
         return
     end
-    if(authToken[1].token == token) then
-        authToken = randomString(100)
-        local newToken = authTokenModel:update({token = authToken}, {
-            where ={
-                id = user.member_id
-            }
-        })
-        print("Loging with token")
+    if (authToken) and (authToken.token == token) then
+        print("jdjd")
+        
+        if(remember) then
+            authToken = randomString(100)
+            local newToken = authTokenModel:update({token = authToken}, {
+                where ={
+                    member_id = user.member_id
+                }
+            })
+        end
         charactersModel:sync()
         local characters = charactersModel:findAll({where = {owner_id = user.member_id, blocked=0}})
-        if (not characters) then
-            error("Characters not found!")
+        if (#characters == 0) then
             triggerClientEvent(plr, "onClientLoginRequest", plr, false, "no_characters")
+            error("Characters not found!")
         else
-            print("Found characters")
             onlinePlayers[user.name] = true
             triggerClientEvent(plr, "onClientLoginRequest", plr, true, "", characters, authToken)
             exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
@@ -49,39 +46,32 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
     end
     passwordVerify(pass, user.members_pass_hash, {}, function(pass)
         if (not pass) then
+            triggerClientEvent(plr, "onClientLoginRequest", plr, false, "wrong_pass")
             error("Wrong password!")
         else
-            if (#authToken == 0) then
-                authToken = randomString(100)
-                local newToken = authTokenModel:create({id = user.id, token = token})
-                if newToken then
-                    print("Token inserted")
+            if(remember) then
+                if not (authToken) then
+                    authToken = randomString(100)
+                    local newToken = authTokenModel:create({member_id = user.member_id, token = authToken})
+                    DBConn:sync()
                 else
-                    print("Token insert failed")
-                end
-                DBConn:sync()
-            else
-                authToken = randomString(100)
-                local newToken = authTokenModel:update({token = authToken}, {
-                    where ={
-                        id = user.member_id
-                    }
-                })
-                if newToken then
-                    print("Token updated")
-                else
-                    print("Token update failed")
+                    authToken = randomString(100)
+                    iprint(authToken)
+                    iprint(user.memberid)
+                    local newToken = authTokenModel:update({token = authToken}, {
+                        where ={
+                            member_id = user.member_id
+                        }
+                    })
                 end
             end
-            print("Password correct!")
             charactersModel:sync()
-            local characters = charactersModel:findAll({where = {owner_id = user.member_id}})
-            if (not characters) then
-                error("Characters not found!")
+            local characters = charactersModel:findAll({where = {owner_id = user.member_id, blocked=0}})
+            if (#characters == 0) then
                 triggerClientEvent(plr, "onClientLoginRequest", plr, false, "no_characters")
+                error("Characters not found!")
             else
                 onlinePlayers[user.name] = true
-                print("Found characters")
                 triggerClientEvent(plr, "onClientLoginRequest", plr, true, "", characters, authToken)
                 exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
                 exports.entityData:setEntityData(plr, "username", user.name)
@@ -95,7 +85,6 @@ addEventHandler("onPlayerQuit", getRootElement(), function()
     if name then
         onlinePlayers[name] = nil
         local characterData = exports.entityData:getEntityData(source, "ch-id")
-        iprint(characterData)
         if characterData then
             charactersModel:update({online=0}, {
                 where={

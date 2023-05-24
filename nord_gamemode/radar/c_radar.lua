@@ -24,18 +24,21 @@ addEventHandler("onClientEntityDataChange", root, onClientEntityDataChange)
 
 addEventHandler('onClientHUDRender', root,
 	function()
+		if money then
         renderRadar()
 		renderHUD()
+
+		end
     end
 )
 
 function renderHUD()
-	--dxDrawImage(GUI.pos.top_bar.x, GUI.pos.top_bar.y, GUI.scale.top_bar.w, GUI.scale.top_bar.h, GUI.txt.top_bar)
+	dxDrawImage(GUI.pos.top_bar.x, GUI.pos.top_bar.y, GUI.scale.top_bar.w, GUI.scale.top_bar.h, GUI.txt.top_bar)
 	dxDrawImage(GUI.pos.bottom_bar.x, GUI.pos.bottom_bar.y, GUI.scale.bottom_bar.w, GUI.scale.bottom_bar.h, GUI.txt.bottom_bar)
-	dxDrawText(math.floor(localPlayer.health), GUI.pos.bottom_bar.x+50/zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
-	dxDrawText("$"..money, GUI.pos.bottom_bar.x+150/zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
-	dxDrawText(hours..":"..minutes, GUI.pos.bottom_bar.x+300/zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
-	dxDrawText("26°C", GUI.pos.bottom_bar.x+415/zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
+	dxDrawText(math.floor(localPlayer.health), GUI.pos.bottom_bar.x+50*zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
+	dxDrawText("$"..money, GUI.pos.bottom_bar.x+150*zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
+	dxDrawText(hours..":"..minutes, GUI.pos.bottom_bar.x+300*zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
+	dxDrawText("26°C", GUI.pos.bottom_bar.x+415*zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
 end
 
 function renderRadar()

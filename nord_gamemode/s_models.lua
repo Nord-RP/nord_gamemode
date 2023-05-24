@@ -72,7 +72,9 @@ authTokenModel = DBConn:define("mta_auth_token", {
     id={
         type = DBManager.INT(11),
         primaryKey = true,
-        autoIncrement = true
+    },
+    member_id={
+        type = DBManager.INT(11),
     },
     token={
         type = DBManager.STRING(255),

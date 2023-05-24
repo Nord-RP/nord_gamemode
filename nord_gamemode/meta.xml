@@ -29,19 +29,15 @@
   <file src="login/files/img/slider_fill.png"/>
   <file src="login/files/img/key_enter.png"/>
   <file src="login/files/img/character_name_bg.png"/>
-  
-  <file src="resources/fonts/Roboto-Medium.ttf"/>
-  <file src="resources/fonts/Roboto-Regular.ttf"/>
-  <file src="resources/fonts/Roboto-Bold.ttf"/>
-  <file src="resources/fonts/Poppins-Regular.ttf"/>
-  <file src="resources/fonts/Poppins-Medium.ttf"/>
-  <file src="resources/fonts/Poppins-Light.ttf"/>
+  <file src="login/files/img/login_error.png"/>
+  <file src="login/files/img/login_ok.png"/>
 
   <file src="login/files/sounds/bg_music.mp3"/>
 
   <!-- HUD/RADAR -->
   <script src="radar/c_data.lua" type="client"/>
   <script src="radar/c_radar.lua" type="client"/>
+  <script src="radar/c_notify.lua" type="client"/>
 
   <file src="radar/files/img/radar_mask.png"/>
   <file src="radar/files/img/radar_bg.png"/>
@@ -51,6 +47,22 @@
   <file src="radar/files/shaders/include/tex_matrix.fx"/>
   <file src="radar/files/img/top_bar.png"/>
   <file src="radar/files/img/bottom_bar.png"/>
+  <file src="radar/files/img/notification_bg.png"/>
+  <file src="radar/files/img/error.png"/>
+  <file src="radar/files/img/ok.png"/>
+  <file src="radar/files/img/info.png"/>
+
+
+  <!-- RESOURCES -->
+  <file src="resources/fonts/Roboto-Medium.ttf"/>
+  <file src="resources/fonts/Roboto-Regular.ttf"/>
+  <file src="resources/fonts/Roboto-Bold.ttf"/>
+  <file src="resources/fonts/Poppins-Regular.ttf"/>
+  <file src="resources/fonts/Poppins-Medium.ttf"/>
+  <file src="resources/fonts/Poppins-Light.ttf"/>
+  <file src="resources/sounds/error.mp3"/>
+  <file src="resources/sounds/ok.mp3"/>
+  <file src="resources/sounds/info.mp3"/>
 
   <!--  -->
   <script src="models/c_models.lua" type="client"/>
@@ -61,6 +73,6 @@
   <file src="models/mugsht.txd"/>
   <include resource="entityData"/>
   <download_priority_group>0</download_priority_group>
-  <min_mta_version server="1.5.2-9.07903" client="1.5.2-9.07903" />
+  <min_mta_version server="1.5.8-9.20979" client="1.5.8-9.20979" />
   <oop>true</oop>
 </meta>

@@ -1,6 +1,6 @@
 <meta>
  	<info author="Rick" type="script" version="1.5.9" />
-	<min_mta_version server="1.5.5-9.13846" client="1.5.6-9.16361"/>
+	<min_mta_version server="1.5.8-9.20979" client="1.5.8-9.20979" />
 	<script src="FEntityData.lua" type="shared"/>
 	<script src="SEntityData.lua" type="server"/>
 	<script src="CEntityData.lua" type="client"/>

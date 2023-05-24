@@ -2,7 +2,7 @@ loadstring(exports.dgs:dgsImportOOPClass(true))()-- load OOP class
 local sW,sH = guiGetScreenSize()
 DEV_MODE = true
 local zoom = sW/1920
-local drawFont = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 50/zoom, false)
+local drawFont = dxCreateFont("login/files/fonts/Poppins-Medium.ttf", 50*zoom, false)
 
 
 addEventHandler("onClientRender", getRootElement(), function()
