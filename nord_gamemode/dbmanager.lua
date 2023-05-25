@@ -27,23 +27,23 @@
 local VERSION = 112
 
 addEventHandler("onResourceStart", resourceRoot, function()    
-    if (not (hasObjectPermissionTo(getThisResource(), 'function.fetchRemote', false))) then
-        error("[DEBUG - DBManager]: You need to add 'function.fetchRemote' permission to check for new releases!")
-    end
+    -- if (not (hasObjectPermissionTo(getThisResource(), 'function.fetchRemote', false))) then
+    --     error("[DEBUG - DBManager]: You need to add 'function.fetchRemote' permission to check for new releases!")
+    -- end
 
-    fetchRemote("https://api.github.com/repos/lodsdev/db-manager/releases/latest", function(data, status)
-        assert(status == 0 and data, "[DBManager] Can't fetch 'api.github.com' for new releases! (Status code: " .. tostring(status) .. ")")
+    -- fetchRemote("https://api.github.com/repos/lodsdev/db-manager/releases/latest", function(data, status)
+    --     assert(status == 0 and data, "[DBManager] Can't fetch 'api.github.com' for new releases! (Status code: " .. tostring(status) .. ")")
 
-        local responseData = fromJSON(data)
-        if (responseData) then
-            local tag_name = tostring(responseData.tag_name)
-            local latestVersion = tonumber(tag_name:gsub("%.", ""))
-            if (latestVersion > VERSION) then
-                --outputDebugString("[DEBUG - DBManager]: New version available! (v" .. responseData.tag_name .. ")")
-                --outputDebugString("[DEBUG - DBManager]: Download: " .. responseData.html_url)
-            end
-        end
-    end)
+    --     local responseData = fromJSON(data)
+    --     if (responseData) then
+    --         local tag_name = tostring(responseData.tag_name)
+    --         local latestVersion = tonumber(tag_name:gsub("%.", ""))
+    --         if (latestVersion > VERSION) then
+    --             --outputDebugString("[DEBUG - DBManager]: New version available! (v" .. responseData.tag_name .. ")")
+    --             --outputDebugString("[DEBUG - DBManager]: Download: " .. responseData.html_url)
+    --         end
+    --     end
+    -- end)
 end)
 
 local cacheUUID = {}
