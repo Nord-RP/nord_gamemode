@@ -38,6 +38,7 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
             error("Characters not found!")
         else
             onlinePlayers[user.name] = true
+            doCheckID(plr)
             triggerClientEvent(plr, "onClientLoginRequest", plr, true, "", characters, authToken)
             exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
             exports.entityData:setEntityData(plr, "username", user.name)
@@ -72,6 +73,7 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
                 error("Characters not found!")
             else
                 onlinePlayers[user.name] = true
+                doCheckID(plr)
                 triggerClientEvent(plr, "onClientLoginRequest", plr, true, "", characters, authToken)
                 exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
                 exports.entityData:setEntityData(plr, "username", user.name)
@@ -118,6 +120,8 @@ addEventHandler("onCharacterSelection", resourceRoot, function(characterId)
     charactersModel:sync()
     spawnPlayer(client, 0,0,3,0,character.skin,0,0)
     client:setHealth(character.health)
+    client:setInterior(0)
+    client:setDimension(0)
     client:fadeCamera(true, 0.5)
     client:setCameraTarget(client)
     showCursor(client, false)

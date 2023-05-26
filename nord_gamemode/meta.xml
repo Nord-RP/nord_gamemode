@@ -52,7 +52,8 @@
   <file src="radar/files/img/ok.png"/>
   <file src="radar/files/img/info.png"/>
 
-
+  <!-- NAMETAGS -->
+  <script src="nametags/c_nametags.lua" type="client"/>
   <!-- RESOURCES -->
   <file src="resources/fonts/Roboto-Medium.ttf"/>
   <file src="resources/fonts/Roboto-Regular.ttf"/>
@@ -60,6 +61,7 @@
   <file src="resources/fonts/Poppins-Regular.ttf"/>
   <file src="resources/fonts/Poppins-Medium.ttf"/>
   <file src="resources/fonts/Poppins-Light.ttf"/>
+  <file src="resources/fonts/LATOWEB-SEMIBOLD.TTF"/>
   <file src="resources/sounds/error.mp3"/>
   <file src="resources/sounds/ok.mp3"/>
   <file src="resources/sounds/info.mp3"/>
