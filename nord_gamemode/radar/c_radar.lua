@@ -1,7 +1,7 @@
 local sW, sH = guiGetScreenSize()
-hudMaskShader = dxCreateShader("radar/files/shaders/hud_mask.fx")
-maskTexture = dxCreateTexture("radar/files/img/radar_mask.png");
-radarBg = dxCreateTexture("radar/files/img/radar_bg.png");
+local hudMaskShader = dxCreateShader("radar/files/shaders/hud_mask.fx")
+local maskTexture = dxCreateTexture("radar/files/img/radar_mask.png");
+local radarBg = dxCreateTexture("radar/files/img/radar_bg.png");
 dxSetShaderValue( hudMaskShader, "sMaskTexture", maskTexture )
 local GUI = RADAR_GUI
 local time = getRealTime()

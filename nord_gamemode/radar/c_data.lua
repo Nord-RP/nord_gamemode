@@ -32,6 +32,7 @@ RADAR_GUI.txt = {
     ["top_bar"] = dxCreateTexture("radar/files/img/top_bar.png"),
     ["bottom_bar"] = dxCreateTexture("radar/files/img/bottom_bar.png"),
     ["notify_bg"] = dxCreateTexture("radar/files/img/notification_bg.png", "argb", true, "wrap"),
+    ["notify_mask"] = dxCreateTexture("radar/files/img/notifymask.png", "argb", true, "wrap"),
     ["error"] = dxCreateTexture("radar/files/img/error.png", "argb", true, "wrap"),
     ["ok"] = dxCreateTexture("radar/files/img/ok.png", "argb", true, "wrap"),
     ["info"] = dxCreateTexture("radar/files/img/info.png", "argb", true, "wrap"),
@@ -41,6 +42,7 @@ RADAR_GUI.scale = {
     ["top_bar"] = {w=481*zoom, h=53*zoom},
     ["bottom_bar"] = {w=481*zoom, h=53*zoom},
     ["notify_bg"] = {w= 481*zoom, h= 89*zoom},
+    ["notify_mask"] = {w= 464*zoom, h= 72*zoom},
     ["notify_icon"] = {w= 45*zoom, h= 45*zoom},
 }
 
@@ -54,6 +56,6 @@ RADAR_GUI.pos = {
 RADAR_GUI.fonts = {
     ["bold_19"] = dxCreateFont("resources/fonts/Roboto-Bold.ttf", 15*zoom, false),
     ["medium_15"] = dxCreateFont("resources/fonts/Roboto-Medium.ttf", 15*zoom, false),
-    ["medium_20"] = dxCreateFont("resources/fonts/Roboto-Medium.ttf", 20*zoom, false),
+    ["medium_20"] = dxCreateFont("resources/fonts/Roboto-Medium.ttf", 18*zoom, false),
     ["medium_10"] = dxCreateFont("resources/fonts/Roboto-Medium.ttf", 10*zoom, false),
 }

@@ -1,15 +1,18 @@
 local NOTIFY_STACK = {}
 local sW, sH = guiGetScreenSize()
+local hudMaskShader = dxCreateShader("radar/files/shaders/hud_mask.fx")
+local maskTexture = dxCreateTexture("radar/files/img/notifymask.png");
+dxSetShaderValue( hudMaskShader, "sMaskTexture", maskTexture )
 
 function addNotification(type, header, desc, time)
     time=time+1000
-    table.insert(NOTIFY_STACK, {type=type, header=header, desc=desc, time=time, startTime=getTickCount(), endTime=getTickCount()+500, animated=false, rT=dxCreateRenderTarget(RADAR_GUI.scale.notify_bg.w, RADAR_GUI.scale.notify_bg.h, true)})
+    table.insert(NOTIFY_STACK, {type=type, header=header, desc=desc, time=time, startTime=getTickCount(), endTime=getTickCount()+500, animated=false, rT=dxCreateRenderTarget(RADAR_GUI.scale.notify_bg.w, RADAR_GUI.scale.notify_bg.h, true),rTMask=dxCreateRenderTarget(RADAR_GUI.scale.notify_mask.w, RADAR_GUI.scale.notify_mask.h, true)})
     playSound("resources/sounds/"..type..".mp3")
 end
 
-
 addEventHandler("onClientRender", getRootElement(), function()
     for i,v in pairs(NOTIFY_STACK) do
+        local timerProgress = 0
         x = RADAR_GUI.pos.notify.w
         y = RADAR_GUI.pos.notify.y-(RADAR_GUI.scale.notify_bg.h*i)
         if NOTIFY_STACK[i-1] then
@@ -54,8 +57,26 @@ addEventHandler("onClientRender", getRootElement(), function()
             local duration = v.endTime - v.startTime
             local progress = elapsedTime / duration
             x = interpolateBetween(Vector3(-RADAR_GUI.scale.notify_bg.w, 0, 0), Vector3(RADAR_GUI.pos.notify.w,0,0), progress, "InOutQuad")
-
         end
+
+        local now = getTickCount()
+        local startTime = v.startTime
+        local endTime = v.startTime+v.time
+        local elapsedTime = now - startTime
+        local duration = endTime - startTime
+        local timerProgress = 1-(elapsedTime / duration)
+
+        dxSetRenderTarget(v.rTMask, true)
+            if v.type == "info" then
+                color = tocolor(66,151,239)
+            elseif v.type == "ok" then
+                color = tocolor(4, 192, 128)
+            else
+                color = tocolor(234, 70, 67)
+            end
+            dxDrawRectangle(1,RADAR_GUI.scale.notify_mask.h-4*zoom, RADAR_GUI.scale.notify_mask.w*timerProgress, 10*zoom, color)
+        dxSetRenderTarget()
+        dxSetShaderValue( hudMaskShader, "sPicTexture", v.rTMask )
         dxSetRenderTarget(v.rT)
             dxDrawImage(0, 0, RADAR_GUI.scale.notify_bg.w, RADAR_GUI.scale.notify_bg.h, RADAR_GUI.txt.notify_bg)
             dxDrawImage(20*zoom, 0+(RADAR_GUI.scale.notify_bg.h/2)-(RADAR_GUI.scale.notify_icon.h/2), RADAR_GUI.scale.notify_icon.w, RADAR_GUI.scale.notify_icon.h, RADAR_GUI.txt[v.type])
@@ -65,10 +86,13 @@ addEventHandler("onClientRender", getRootElement(), function()
                 dxDrawText(v.header, 0+85*zoom, 0+(RADAR_GUI.scale.notify_bg.h/2)-dxGetFontHeight(1, RADAR_GUI.fonts.medium_20)/2, null, null, tocolor(255, 255, 255), 1, RADAR_GUI.fonts.medium_20, "left", "center")            
                 formatted = wordWrap(v.desc, 400*zoom, 1, RADAR_GUI.fonts.medium_10, true)
                 for i,v in pairs(formatted) do
-                    dxDrawText(formatted[i], 0+85*zoom, 0+(RADAR_GUI.scale.notify_bg.h/2)+5*zoom+((i-1)*dxGetFontHeight()), null, null, tocolor(255, 255, 255), 1, RADAR_GUI.fonts.medium_10, "left", "center", false, false, false, true)            
+                    dxDrawText(formatted[i], 0+85*zoom, 0+(RADAR_GUI.scale.notify_bg.h/2)+4*zoom+((i-1)*dxGetFontHeight()), null, null, tocolor(255, 255, 255), 1, RADAR_GUI.fonts.medium_10, "left", "center", false, false, false, true)            
                 end
             end
+            dxDrawImage(9*zoom, 9*zoom, RADAR_GUI.scale.notify_mask.w, RADAR_GUI.scale.notify_mask.h, hudMaskShader)
         dxSetRenderTarget()
+
+        
         dxDrawImage(x, y, RADAR_GUI.scale.notify_bg.w, RADAR_GUI.scale.notify_bg.h, v.rT)
     end
 end)
