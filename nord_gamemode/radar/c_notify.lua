@@ -5,8 +5,10 @@ local maskTexture = dxCreateTexture("radar/files/img/notifymask.png");
 dxSetShaderValue( hudMaskShader, "sMaskTexture", maskTexture )
 
 function addNotification(type, header, desc, time)
+    if not type or not header then return end
+    if not time then time = 1000 end
     time=time+1000
-    table.insert(NOTIFY_STACK, {type=type, header=header, desc=desc, time=time, startTime=getTickCount(), endTime=getTickCount()+500, animated=false, rT=dxCreateRenderTarget(RADAR_GUI.scale.notify_bg.w, RADAR_GUI.scale.notify_bg.h, true),rTMask=dxCreateRenderTarget(RADAR_GUI.scale.notify_mask.w, RADAR_GUI.scale.notify_mask.h, true)})
+    table.insert(NOTIFY_STACK, {type=type, header=header, desc=desc or false, time=time, startTime=getTickCount(), endTime=getTickCount()+500, animated=false, rT=dxCreateRenderTarget(RADAR_GUI.scale.notify_bg.w, RADAR_GUI.scale.notify_bg.h, true),rTMask=dxCreateRenderTarget(RADAR_GUI.scale.notify_mask.w, RADAR_GUI.scale.notify_mask.h, true)})
     playSound("resources/sounds/"..type..".mp3")
 end
 
@@ -99,20 +101,24 @@ end)
 
 addCommandHandler("testNotify", function()
     addNotification("info", "Informacja", "Oto krótka informacja dla gracza", 2000)
-    setTimer(function()
+    Timer(function()
         addNotification("error", "Błąd", "Oto opis błędu w czynności", 5000)
     end,500,1)    
-    setTimer(function()
+    Timer(function()
         addNotification("ok", "Powodzenie", "Operacja się powiodła, gratulacje! Twoje konto bankowe zostało zasilone kwotą #85bb65$500.000#FFFFFF.", 2000)
     end,1000,1)
-    setTimer(function()
+    Timer(function()
         addNotification("error", "Błąd", "Oto opis błędu w czynności", 5000)
     end,1500,1)    
-    setTimer(function()
+    Timer(function()
         addNotification("ok", "Powodzenie", "Operacja się powiodła, gratulacje! Twoje konto bankowe zostało zasilone kwotą #85bb65$500.000#FFFFFF.", 2000)
     end,2000,1)
 end)
 
+addEvent("client:notification", true)
+addEventHandler("client:notification", getRootElement(), function(type, header, desc, time)
+    addNotification(type, header, desc, time)
+end)
 
 function wordWrap(text, maxwidth, scale, font, colorcoded)
     local lines = {}

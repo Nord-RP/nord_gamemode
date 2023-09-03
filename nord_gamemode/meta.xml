@@ -67,6 +67,29 @@
   <file src="resources/sounds/ok.mp3"/>
   <file src="resources/sounds/info.mp3"/>
 
+
+  <!-- VEHICLE SYSTEM -->
+  <script src="vehicleSystem/s_vehicleCommands.lua" type="server"/>
+  <script src="vehicleSystem/c_vehicleSystem.lua" type="client"/>
+  <script src="vehicleSystem/s_vehicleSystem.lua" type="server"/>
+  <script src="vehicleSystem/c_vehicleCommands.lua" type="client"/>
+  <file src="vehicleSystem/sounds/carLock.mp3"/>
+  <file src="vehicleSystem/sounds/engineIgnition.wav"/>
+  <file src="vehicleSystem/sounds/engineIgnitionStart.wav"/>
+  <file src="vehicleSystem/fx/circle.fx"/>
+  <file src="vehicleSystem/fx/hud_mask.fx"/>
+  <file src="vehicleSystem/fx/include/tex_matrix.fx"/>
+  <file src="vehicleSystem/img/speedo_circle.png"/>
+
+  <!-- ADMIN SYSTEM -->
+  <script src="adminSystem/s_adminSystem.lua" type="server"/>
+  <script src="adminSystem/s_adminCommands.lua" type="server"/>
+  <script src="adminSystem/c_adminSystem.lua" type="client"/>  
+
+  <!-- PLAYER SYSTEM -->
+  <script src="playerSystem/s_playerSystem.lua" type="server"/>
+  <script src="playerSystem/c_playerSystem.lua" type="client"/>
+
   <!--  -->
   <script src="models/c_models.lua" type="client"/>
   <script src="s_models.lua" type="server"/>

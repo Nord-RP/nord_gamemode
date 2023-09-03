@@ -125,12 +125,12 @@ function loginUser(button, state)
         passLen = string.len(pass)
     end
     local remember = GUI.elements.checkbox:getSelected()
-    triggerServerEvent("onLoginRequest", resourceRoot, login, pass, remember, token)
+    triggerServerEvent("server:loginRequest", resourceRoot, login, pass, remember, token)
 end
 
 
-addEvent("onClientLoginRequest", true)
-addEventHandler("onClientLoginRequest", getRootElement(), function(status, errorCode, characters, token)
+addEvent("client:loginRequest", true)
+addEventHandler("client:loginRequest", getRootElement(), function(status, errorCode, characters, token)
     GUI.elements.error:setVisible(false)
     GUI.elements.ok:setVisible(false)
     if not(status) then 
@@ -172,12 +172,12 @@ addEventHandler("onClientLoginRequest", getRootElement(), function(status, error
     black:setLayer("top")
     black:alphaTo(1, "Linear", 1000)
     playSound("resources/sounds/ok.mp3")
-    setTimer(function()
+    Timer(function()
         GUI.elements.browser_image:getElement():destroy()
         GUI.elements.browser:destroy()
         displayCharacterSelection(characters)
         black:alphaTo(0, "Linear", 1000)
-        setTimer(function()
+        Timer(function()
             black:getElement():destroy()
         end, 1000, 1)
     end,1000,1)

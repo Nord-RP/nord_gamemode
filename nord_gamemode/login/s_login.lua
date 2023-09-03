@@ -8,20 +8,18 @@
 
 local onlinePlayers = {}
 
-addEvent("onLoginRequest", true)
-addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, token)
-    iprint(remember)
+addEvent("server:loginRequest", true)
+addEventHandler("server:loginRequest", resourceRoot, function(name, pass, remember, token)
     forumAccountsModel:sync()
     authTokenModel:sync()
     local user = forumAccountsModel:findOne({where = {name = name}})
     local authToken = authTokenModel:findOne({where = {member_id = user.member_id}})
     local plr = client
     if(onlinePlayers[user.name]) then 
-        triggerClientEvent(plr, "onClientLoginRequest", plr, false, "user_logged")
+        triggerClientEvent(plr, "client:loginRequest", plr, false, "user_logged")
         return
     end
     if (authToken) and (authToken.token == token) then
-        print("jdjd")
         
         if(remember) then
             authToken = randomString(100)
@@ -34,20 +32,21 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
         charactersModel:sync()
         local characters = charactersModel:findAll({where = {owner_id = user.member_id, blocked=0}})
         if (#characters == 0) then
-            triggerClientEvent(plr, "onClientLoginRequest", plr, false, "no_characters")
+            triggerClientEvent(plr, "client:loginRequest", plr, false, "no_characters")
             error("Characters not found!")
         else
             onlinePlayers[user.name] = true
             doCheckID(plr)
-            triggerClientEvent(plr, "onClientLoginRequest", plr, true, "", characters, authToken)
+            triggerClientEvent(plr, "client:loginRequest", plr, true, "", characters, authToken)
             exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
             exports.entityData:setEntityData(plr, "username", user.name)
+            exports.entityData:setEntityData(plr, "userid", user.member_id)
         end
         return
     end
     passwordVerify(pass, user.members_pass_hash, {}, function(pass)
         if (not pass) then
-            triggerClientEvent(plr, "onClientLoginRequest", plr, false, "wrong_pass")
+            triggerClientEvent(plr, "client:loginRequest", plr, false, "wrong_pass")
             error("Wrong password!")
         else
             if(remember) then
@@ -69,14 +68,15 @@ addEventHandler("onLoginRequest", resourceRoot, function(name, pass, remember, t
             charactersModel:sync()
             local characters = charactersModel:findAll({where = {owner_id = user.member_id, blocked=0}})
             if (#characters == 0) then
-                triggerClientEvent(plr, "onClientLoginRequest", plr, false, "no_characters")
+                triggerClientEvent(plr, "client:loginRequest", plr, false, "no_characters")
                 error("Characters not found!")
             else
                 onlinePlayers[user.name] = true
                 doCheckID(plr)
-                triggerClientEvent(plr, "onClientLoginRequest", plr, true, "", characters, authToken)
+                triggerClientEvent(plr, "client:loginRequest", plr, true, "", characters, authToken)
                 exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
                 exports.entityData:setEntityData(plr, "username", user.name)
+                exports.entityData:setEntityData(plr, "userid", user.member_id)
             end
         end
     end)
@@ -98,8 +98,8 @@ addEventHandler("onPlayerQuit", getRootElement(), function()
     end
 end)
 
-addEvent("onCharacterSelection", true)
-addEventHandler("onCharacterSelection", resourceRoot, function(characterId)
+addEvent("server:characterSelection", true)
+addEventHandler("server:characterSelection", resourceRoot, function(characterId)
     local character = charactersModel:findByPk(characterId)
     local character = character[1]
     exports.entityData:setEntityData(client, "ch-id", characterId)
@@ -126,6 +126,22 @@ addEventHandler("onCharacterSelection", resourceRoot, function(characterId)
     client:setCameraTarget(client)
     showCursor(client, false)
     showChat(client, true)
+    client:addPlayerLoginBinds()
+end)
+
+function Player:addPlayerLoginBinds()
+    --Odpalanie pojazdu
+    bindKey(self, "k", "down", startVehicleEngine)
+end
+
+
+
+addEventHandler("onResourceStart", resourceRoot, function()
+    for i,v in pairs(Element.getAllByType("player")) do
+        local characterId = exports.entityData:getEntityData(v, "ch-id")
+        if not characterId then return end
+        v:addPlayerLoginBinds()
+    end
 end)
 
 

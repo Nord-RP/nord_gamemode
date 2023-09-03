@@ -4,8 +4,10 @@ DBConn = DBManager:new({
     port = 3306,
     username = "root",
     password = "",
-    database = "dev_forum",
+    database = "mta_nord_dev",
 })
+
+DEV_MODE = true
 
 -- check if connection is successful
 -- "getConnection" is a function that returns a boolean value indicating if the connection was successful 
@@ -14,6 +16,8 @@ if (not DBConn:getConnection()) then
     error("DBManager: Connection failed", 2)
 end
 
+
+--OOP
 function reserveID()
     local id = 1
     while getPlayerByID(id) do
@@ -71,3 +75,19 @@ function getPlayerFromPartialName(name)
         end
     end
 end
+
+addEventHandler("onPlayerCommand", root,
+    function()
+        local characterId = exports.entityData:getEntityData(source, "ch-id")
+        if not characterId then return end
+    end
+)
+
+addEventHandler("onResourceStart", resourceRoot, function()
+    if DEV_MODE then
+        print("!!DEV_MODE!!")
+        Timer(function()
+            Vehicle:createPersonal(0, 411, Vector3(0, 5, 3), "TEST")
+        end, 500, 1)
+    end
+end)

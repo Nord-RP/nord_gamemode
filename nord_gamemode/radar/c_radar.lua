@@ -9,7 +9,7 @@ local hours = string.format("%02d", time.hour)
 local minutes = string.format("%02d", time.minute)
 local money = exports.entityData:getEntityData(localPlayer, "ch-money")
 
-setTimer(function()
+Timer(function()
 	local time = getRealTime()
 	hours = string.format("%02d", time.hour)
 	minutes = string.format("%02d", time.minute)

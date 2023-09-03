@@ -3,7 +3,8 @@
 --GUI
 
 addEventHandler("onResourceStart", resourceRoot, function()
-    local resourceStatus = getResourceState("entityData")
+    local entityDataResource = Resource.getFromName("entityData")
+    local resourceStatus = entityDataResource:getState()
     if (resourceStatus ~= "running") then
         restartResource(getThisResource())
     end
@@ -26,7 +27,7 @@ function displayCharacterSelection(characters)
     ped:setInterior(6, 215, 77.5, 1005)
     bindKey("arrow_l", "down", moveCharacter)
     bindKey("arrow_r", "down", moveCharacter)
-    setTimer(function()
+    Timer(function()
         removeWorldModel(14846, 10000, 213, 80, 1009, 6)
     end,100,1)
     
@@ -158,8 +159,8 @@ function selectCharacter()
     for i,v in pairs(GUI.elements.ch_name) do
         v:destroy()
     end
-    fadeCamera(false, 1)
-    triggerServerEvent("onCharacterSelection", resourceRoot, charactersT[currentCharacter].id)
+    Camera.fade(false, 1)
+    triggerServerEvent("server:characterSelection", resourceRoot, charactersT[currentCharacter].id)
     for i,v in pairs(selectionCharacters) do
         if isElement(v.element) then
             v.element:destroy()
@@ -200,7 +201,7 @@ end
 function moveCharacter(key)
     if(key == "arrow_l") then
         local ped = selectionCharacters[currentCharacter].element
-        setTimer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
+        Timer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
         ped:setRotation(0, 0, 180, "default", true)
         setPedAnalogControlState(ped, "forwards", 0.5)
 
@@ -234,8 +235,8 @@ function moveCharacter(key)
         label:setFont(GUI.fonts.poppins_light_18)
         label:setProperty("colorCoded", true)
 
-        setTimer(destroyElement, 1000, 1, ped)
-        setTimer(function()
+        Timer(destroyElement, 1000, 1, ped)
+        Timer(function()
             setPedAnalogControlState(newPed, "forwards", 0)
             newPed:setRotation(0,0,-90,"default", true)
             bindKey("arrow_r", "down", moveCharacter)
@@ -246,7 +247,7 @@ function moveCharacter(key)
         updateLabels()
     else
         local ped = selectionCharacters[currentCharacter].element
-        setTimer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
+        Timer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
         ped:setRotation(0, 0, 0, "default", true)
         setPedAnalogControlState(ped, "forwards", 0.5)
 
@@ -280,8 +281,8 @@ function moveCharacter(key)
         label:setProperty("colorCoded", true)
 
         setPedAnalogControlState(newPed, "forwards", 0.5)
-        setTimer(destroyElement, 1000, 1, ped)
-        setTimer(function()
+        Timer(destroyElement, 1000, 1, ped)
+        Timer(function()
             setPedAnalogControlState(newPed, "forwards", 0)
             newPed:setRotation(0,0,-90,"default", true)
             bindKey("arrow_r", "down", moveCharacter)
