@@ -55,6 +55,9 @@
 
   <!-- NAMETAGS -->
   <script src="nametags/c_nametags.lua" type="client"/>
+  <file src="nametags/files/img/chat_icon.png"/>
+  <file src="nametags/files/img/phone_icon.png"/>
+  
   <!-- RESOURCES -->
   <file src="resources/fonts/Roboto-Medium.ttf"/>
   <file src="resources/fonts/Roboto-Regular.ttf"/>
@@ -74,12 +77,32 @@
   <script src="vehicleSystem/s_vehicleSystem.lua" type="server"/>
   <script src="vehicleSystem/c_vehicleCommands.lua" type="client"/>
   <file src="vehicleSystem/sounds/carLock.mp3"/>
+  <file src="vehicleSystem/sounds/handbrake.mp3"/>
   <file src="vehicleSystem/sounds/engineIgnition.wav"/>
   <file src="vehicleSystem/sounds/engineIgnitionStart.wav"/>
   <file src="vehicleSystem/fx/circle.fx"/>
   <file src="vehicleSystem/fx/hud_mask.fx"/>
   <file src="vehicleSystem/fx/include/tex_matrix.fx"/>
   <file src="vehicleSystem/img/speedo_circle.png"/>
+  <file src="vehicleSystem/img/speedo_out_circle.png"/>
+  <file src="vehicleSystem/img/speedo_arrow.png"/>
+  <file src="vehicleSystem/img/speedo_mask.png"/>
+  <file src="vehicleSystem/img/handbrake_icon_on.png"/>
+  <file src="vehicleSystem/img/handbrake_icon_off.png"/>  
+  <file src="vehicleSystem/img/engine_icon_on.png"/>
+  <file src="vehicleSystem/img/engine_icon_off.png"/>  
+  <file src="vehicleSystem/img/broken_icon_on.png"/>
+  <file src="vehicleSystem/img/broken_icon_off.png"/>
+  <file src="vehicleSystem/img/tire_icon_on.png"/>
+  <file src="vehicleSystem/img/tire_icon_off.png"/>
+  <file src="vehicleSystem/img/fuel_icon_on.png"/>
+  <file src="vehicleSystem/img/fuel_icon_off.png"/>  
+  <file src="vehicleSystem/img/fuel_level_empty.png"/>
+  <file src="vehicleSystem/img/fuel_level_full.png"/>
+  <file src="vehicleSystem/img/fuel_indicators.png"/>
+  
+  <file src="vehicleSystem/fonts/tommy_regular.otf"/>
+  <file src="vehicleSystem/fonts/tommy_black.otf"/>
 
   <!-- ADMIN SYSTEM -->
   <script src="adminSystem/s_adminSystem.lua" type="server"/>

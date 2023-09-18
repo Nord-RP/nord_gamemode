@@ -41,14 +41,18 @@ function startVehicleEngine(player)
     local veh = player:getOccupiedVehicle()
     if not veh then return end
     local engineState = veh:getEngineState()
-    if exports.entityData:getEntityData(veh, "v-uid") == 0 then 
-        for i,v in pairs(Element.getWithinRange(veh:getPosition(), 10, "player"), veh.interior, veh.dimension) do
-            triggerClientEvent(v, "client:playCarIgnitionSound", v, veh)
+    if exports.entityData:getEntityData(veh, "v-uid") == 0 then
+        if engineState then
+            veh:setEngineState(false)
+        else
+            for i,v in pairs(Element.getWithinRange(veh:getPosition(), 10, "player"), veh.interior, veh.dimension) do
+                triggerClientEvent(v, "client:playCarIgnitionSound", v, veh)
+            end
+            Timer(function()
+                veh:setEngineState(true)
+            end, 3200, 1)
+            return
         end
-        Timer(function()
-            veh:setEngineState(true)
-        end, 3200, 1)
-        return
     end
     if engineState then
         veh:setEngineState(false)

@@ -177,7 +177,7 @@ function updateLabels()
         elseif(i==1) then
             label_content = "#83d19b$#cac9cc"..formatNumber(charactersT[currentCharacter].money, ",")
         elseif(i==2) then
-            label_content = "#7a79b5"..exports.entityData:getEntityData(localPlayer, "member_points")
+            label_content = "#7a79b5"..exports.entityData:getEntityData(localPlayer, "member_points") or 0
         elseif(i==3) then
             local game_h, game_m = msToGameTime(charactersT[currentCharacter].playtime)
             label_content = "#799eb5"..game_h.."h "..game_m.."m"

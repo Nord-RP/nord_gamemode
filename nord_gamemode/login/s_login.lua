@@ -38,7 +38,7 @@ addEventHandler("server:loginRequest", resourceRoot, function(name, pass, rememb
             onlinePlayers[user.name] = true
             doCheckID(plr)
             triggerClientEvent(plr, "client:loginRequest", plr, true, "", characters, authToken)
-            exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
+            exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points or 0)
             exports.entityData:setEntityData(plr, "username", user.name)
             exports.entityData:setEntityData(plr, "userid", user.member_id)
         end
@@ -74,7 +74,7 @@ addEventHandler("server:loginRequest", resourceRoot, function(name, pass, rememb
                 onlinePlayers[user.name] = true
                 doCheckID(plr)
                 triggerClientEvent(plr, "client:loginRequest", plr, true, "", characters, authToken)
-                exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points)
+                exports.entityData:setEntityData(plr, "member_points", user.pp_reputation_points or 0 )
                 exports.entityData:setEntityData(plr, "username", user.name)
                 exports.entityData:setEntityData(plr, "userid", user.member_id)
             end

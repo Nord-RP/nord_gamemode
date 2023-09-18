@@ -198,3 +198,9 @@ function dgsBlur()
         GUI.elements.edit_password:setProperty("bgImage", GUI.txt.editbox)
     end
 end
+
+addEventHandler("onClientResourceStart", resourceRoot, function()
+    local characterId = exports.entityData:getEntityData(localPlayer, "ch-id")
+    if not characterId then return end
+    localPlayer:addPlayerLoginBinds()
+end)
