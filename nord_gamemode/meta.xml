@@ -52,6 +52,12 @@
   <file src="radar/files/img/error.png"/>
   <file src="radar/files/img/ok.png"/>
   <file src="radar/files/img/info.png"/>
+  <file src="radar/files/img/blips/airport.png"/>
+  <file src="radar/files/img/blips/vehicle.png"/>
+  <file src="radar/files/img/blips/north.png"/>
+  <file src="radar/files/img/blips/player.png"/>
+  <file src="radar/files/img/blips/target.png"/>
+  <file src="radar/files/img/blips/tuning.png"/>
 
   <!-- NAMETAGS -->
   <script src="nametags/c_nametags.lua" type="client"/>
@@ -60,6 +66,7 @@
   
   <!-- RESOURCES -->
   <file src="resources/fonts/Roboto-Medium.ttf"/>
+  <file src="resources/fonts/Roboto-Thin.ttf"/>
   <file src="resources/fonts/Roboto-Regular.ttf"/>
   <file src="resources/fonts/Roboto-Bold.ttf"/>
   <file src="resources/fonts/Poppins-Regular.ttf"/>
@@ -74,6 +81,8 @@
   <!-- VEHICLE SYSTEM -->
   <script src="vehicleSystem/s_vehicleCommands.lua" type="server"/>
   <script src="vehicleSystem/c_vehicleSystem.lua" type="client"/>
+  <script src="vehicleSystem/c_vehicle_speedoMeter.lua" type="client"/>
+
   <script src="vehicleSystem/s_vehicleSystem.lua" type="server"/>
   <script src="vehicleSystem/c_vehicleCommands.lua" type="client"/>
   <file src="vehicleSystem/sounds/carLock.mp3"/>
@@ -100,6 +109,16 @@
   <file src="vehicleSystem/img/fuel_level_empty.png"/>
   <file src="vehicleSystem/img/fuel_level_full.png"/>
   <file src="vehicleSystem/img/fuel_indicators.png"/>
+
+  <file src="vehicleSystem/img/vehPanel/panel_bg.png"/>
+  <file src="vehicleSystem/img/vehPanel/item_unselected.png"/>
+  <file src="vehicleSystem/img/vehPanel/item_selected.png"/>
+  <file src="vehicleSystem/img/vehPanel/icon_heart.png"/>
+  <file src="vehicleSystem/img/vehPanel/icon_heart_on.png"/>
+  <file src="vehicleSystem/img/vehPanel/color_gradient_left.png"/>
+  <file src="vehicleSystem/img/vehPanel/color_gradient_right.png"/>
+  <file src="vehicleSystem/img/vehPanel/locate_vehicle.png"/>
+  <file src="vehicleSystem/img/vehPanel/spawn_vehicle.png"/>
   
   <file src="vehicleSystem/fonts/tommy_regular.otf"/>
   <file src="vehicleSystem/fonts/tommy_black.otf"/>
@@ -111,12 +130,17 @@
 
   <!-- PLAYER SYSTEM -->
   <script src="playerSystem/s_playerSystem.lua" type="server"/>
+  <script src="playerSystem/s_playerCommands.lua" type="server"/>
   <script src="playerSystem/c_playerSystem.lua" type="client"/>
 
   <!--  -->
   <script src="models/c_models.lua" type="client"/>
   <script src="s_models.lua" type="server"/>
 
+
+  <!-- Utilities -->
+  <script src="utilities/s_elementUtilities.lua" type="server"/>
+  <script src="utilities/shared_utilities.lua" type="shared"/>
   <file src="models/mugsht.dff"/>
   <file src="models/mugsht.col"/>
   <file src="models/mugsht.txd"/>

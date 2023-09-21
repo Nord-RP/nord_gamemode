@@ -33,7 +33,8 @@ addEventHandler('onClientHUDRender', root,
 )
 
 function renderHUD()
-	dxDrawImage(GUI.pos.top_bar.x, GUI.pos.top_bar.y, GUI.scale.top_bar.w, GUI.scale.top_bar.h, GUI.txt.top_bar)
+	--TODO:jesli ma duty
+	--dxDrawImage(GUI.pos.top_bar.x, GUI.pos.top_bar.y, GUI.scale.top_bar.w, GUI.scale.top_bar.h, GUI.txt.top_bar)
 	dxDrawImage(GUI.pos.bottom_bar.x, GUI.pos.bottom_bar.y, GUI.scale.bottom_bar.w, GUI.scale.bottom_bar.h, GUI.txt.bottom_bar)
 	dxDrawText(math.floor(localPlayer.health), GUI.pos.bottom_bar.x+50*zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
 	dxDrawText("$"..money, GUI.pos.bottom_bar.x+150*zoom, GUI.pos.bottom_bar.y+GUI.scale.bottom_bar.h/2, nil, nil, tocolor(186, 186, 186), 1, GUI.fonts.bold_19, "left", "center")
@@ -63,8 +64,47 @@ function renderRadar()
 
 			dxSetRenderTarget(Radar.RenderTarget, true);                
 			dxDrawImage(Radar.NormalTargetSize / 2, Radar.NormalTargetSize / 2, Radar.BiggerTargetSize, Radar.BiggerTargetSize, hudMaskShader, math.deg(-pRotation), 0, 0, tocolor(255, 255, 255, 255), false);
+			local serverBlips = Element.getAllByType('blip');
+				
+			table.sort(serverBlips,
+				function(b1, b2)
+					return b1.ordering < b2.ordering;
+				end
+			);
 
-
+			for _, blip in ipairs(serverBlips) do
+				local blipX, blipY, blipZ = getElementPosition(blip);
+				
+				if (localPlayer ~= getElementAttachedTo(blip) and getElementInterior(localPlayer) == getElementInterior(blip) and getElementDimension(localPlayer) == getElementDimension(blip)) then
+					local blipDistance = getDistanceBetweenPoints2D(blipX, blipY, playerX, playerY);
+					local blipRotation = math.deg(-getVectorRotation(playerX, playerY, blipX, blipY) - (-pRotation)) - 180;
+					local blipRadius = math.min((blipDistance / (streamDistance * Radar.CurrentZoom)) * Radar.NormalTargetSize, Radar.NormalTargetSize);
+					local distanceX, distanceY = getPointFromDistanceRotation(0, 0, blipRadius, blipRotation);
+					
+					local blipSettings = {
+						['color'] = {255, 255, 255, 255},
+						['size'] = getElementData(blip, 'blipSize') or 20,
+						['exclusive'] = getElementData(blip, 'exclusiveBlip') or false,
+						['icon'] = getElementData(blip, 'blipIcon') or 'target'
+					};
+					
+					local blipX, blipY = Radar.NormalTargetSize * 1.5 + (distanceX - (blipSettings['size'] / 2)), Radar.NormalTargetSize * 1.5 + (distanceY - (blipSettings['size'] / 2));
+					local calculatedX, calculatedY = ((Radar.PosX + (Radar.Width / 2)) - (blipSettings['size'] / 2)) + (blipX - (Radar.NormalTargetSize * 1.5) + (blipSettings['size'] / 2)), (((Radar.PosY + (Radar.Height / 2)) - (blipSettings['size'] / 2)) + (blipY - (Radar.NormalTargetSize * 1.5) + (blipSettings['size'] / 2)));
+					
+					if (blipSettings['icon'] == 'target' or blipSettings['icon'] == 'waypoint') then
+						blipSettings['color'] = {getBlipColor(blip)};
+					end
+					
+					if (blipSettings['exclusive'] == true) then
+						blipX = math.max(blipX + (Radar.PosX - calculatedX), math.min(blipX + (Radar.PosX + Radar.Width - blipSettings['size'] - calculatedX), blipX));
+						blipY = math.max(blipY + (Radar.PosY - calculatedY), math.min(blipY + (Radar.PosY + Radar.Height - blipSettings['size'] - 0 - calculatedY), blipY));
+					end
+					
+					dxSetBlendMode('modulate_add');
+					dxDrawImage(blipX, blipY, blipSettings['size'], blipSettings['size'], 'radar/files/img/blips/' .. blipSettings['icon'] .. '.png', 0, 0, 0, tocolor(blipSettings['color'][1], blipSettings['color'][2], blipSettings['color'][3], blipSettings['color'][4]), false);
+					dxSetBlendMode('blend');
+				end
+			end
 			dxSetRenderTarget(Radar.FinalTarget);
 			dxDrawImageSection(0,0, Radar.Width, Radar.Height, Radar.NormalTargetSize / 2 + (Radar.BiggerTargetSize / 2) - (Radar.Width / 2), Radar.NormalTargetSize / 2 + (Radar.BiggerTargetSize / 2) - (Radar.Height / 2), Radar.Width, Radar.Height, Radar.RenderTarget, 0, -90, 0, tocolor(255, 255, 255, 255));
 			dxSetRenderTarget()

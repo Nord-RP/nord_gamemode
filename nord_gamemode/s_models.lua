@@ -99,6 +99,9 @@ vehiclesModel = DBConn:define("mta_vehicles", {
     fuel={
         type = DBManager.INT(4),
     },
+    health={
+        type = DBManager.INT(6),
+    },
     mileage={
         type = DBManager.INT(11),
     },
@@ -111,6 +114,9 @@ vehiclesModel = DBConn:define("mta_vehicles", {
     spawn_position={
         type = DBManager.STRING(255),
     },
+    favorite={
+        type = DBManager.INT(1),
+    }
 })
 
 adminsModel = DBConn:define("mta_admins", {

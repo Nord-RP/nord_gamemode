@@ -91,3 +91,7 @@ addEventHandler("onResourceStart", resourceRoot, function()
         end, 500, 1)
     end
 end)
+
+local north = Blip( 0, 10000, 0, 4 )
+north:setData("exclusiveBlip", true)
+north:setData("blipIcon", "north")

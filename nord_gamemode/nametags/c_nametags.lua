@@ -80,10 +80,8 @@ addEventHandler("onClientRender", root, function()
     local chatBoxOpen = GuiElement.isChatBoxInputActive()
     local chatBoxOpenData = exports.entityData:getEntityData(localPlayer, "ch-icon-chat")
     if chatBoxOpen and not chatBoxOpenData then
-        outputChatBox("test2")
         exports.entityData:setEntityData(localPlayer, "ch-icon-chat", true)
     elseif not chatBoxOpen and chatBoxOpenData then
-        outputChatBox("test3")
         exports.entityData:setEntityData(localPlayer, "ch-icon-chat", false)
     end
 

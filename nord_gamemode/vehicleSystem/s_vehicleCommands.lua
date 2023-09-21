@@ -1,5 +1,14 @@
 addCommandHandler("v", function(plr, cmd, type, ...)
-    if not type then return end -- gui pojazdów
+    if not type then 
+        vehiclesModel:sync()
+        local characterId = exports.entityData:getEntityData(plr, "ch-id")
+        local vehicles = vehiclesModel:findAll({where = {owner = characterId, owner_type=0}})
+        if not vehicles or #vehicles == 0 then
+            return triggerClientEvent(plr, "client:notification", plr, "error", "Nie znaleziono pojazdów.", "Twoja postać nie posiada żadnych pojazdów.")
+        else
+            triggerClientEvent(plr, "client:openVehicleMenu", plr, vehicles)
+        end
+    end -- gui pojazdów
     if type == "lista" then
         vehiclesModel:sync()
         local characterId = exports.entityData:getEntityData(plr, "ch-id")
@@ -55,4 +64,33 @@ addCommandHandler("v", function(plr, cmd, type, ...)
         outputChatBox("  #E9D502[-]#FFFFFF ID: "..vUID.." | Model: "..vModel.." | Rejestracja: "..vPlate, plr, 255, 255, 255, true)
     end
     return true
+end)
+
+
+addEvent("server:onVehicleFavorite", true)
+addEventHandler("server:onVehicleFavorite", root, function(vehID)
+    vehiclesModel:sync()
+    local veh = vehiclesModel:findByPk(vehID)
+    if not veh or #veh == 0 then return error("Could not set vehicle ID: "..vehID.." as favorite.") end
+    local favorite = veh[1].favorite
+    --chuj wie jak to działa, ale działa, teoretycznie warunek powinien byc odwrotny, ale wtedy 0=ulubiony, wtf lua
+    if favorite == 0 then
+        vehiclesModel:update({favorite = 1}, {
+            where = {
+                id = vehID
+            }
+        })
+    else
+        vehiclesModel:update({favorite = 0}, {
+            where = {
+                id = vehID
+            }
+        })
+    end
+    vehiclesModel:sync()
+end)
+
+addEvent("server:clientSpawnVehicle", true)
+addEventHandler("server:clientSpawnVehicle", root, function(vehID)
+    Vehicle:createPersonal(vehID)
 end)
