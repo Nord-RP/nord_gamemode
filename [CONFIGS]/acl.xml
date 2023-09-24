@@ -25,6 +25,7 @@
         <object name="resource.acpanel"></object>
         <object name="resource.dgs"></object>
         <object name="resource.entityData"></object>
+        <object name="resource.nord_gamemode"></object>
         <object name="user.Allerek"></object>
     </group>
     <group name="Console">
@@ -821,6 +822,6 @@
         <right name="general.ModifyOtherObjects" access="false" who="" pending="true" date=""></right>
     </acl>
     <acl name="autoACL_pAttach">
-        <right name="function.fetchRemote" access="false" who="" pending="true" date=""></right>
+        <right name="function.fetchRemote" access="true" who="" pending="true" date=""></right>
     </acl>
 </acl>

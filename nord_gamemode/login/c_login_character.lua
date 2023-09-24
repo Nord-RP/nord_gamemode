@@ -3,7 +3,8 @@
 --GUI
 
 addEventHandler("onResourceStart", resourceRoot, function()
-    local resourceStatus = getResourceState("entityData")
+    local entityDataResource = Resource.getFromName("entityData")
+    local resourceStatus = entityDataResource:getState()
     if (resourceStatus ~= "running") then
         restartResource(getThisResource())
     end
@@ -26,7 +27,7 @@ function displayCharacterSelection(characters)
     ped:setInterior(6, 215, 77.5, 1005)
     bindKey("arrow_l", "down", moveCharacter)
     bindKey("arrow_r", "down", moveCharacter)
-    setTimer(function()
+    Timer(function()
         removeWorldModel(14846, 10000, 213, 80, 1009, 6)
     end,100,1)
     
@@ -48,7 +49,7 @@ function drawCharacterSelection()
         if (i == 0) then
             box_x = GUI.pos.select_box.x
         else
-            box_x = GUI.pos.select_box.x+(GUI.scale.select_box.w*i)+((20/zoom)*i)
+            box_x = GUI.pos.select_box.x+(GUI.scale.select_box.w*i)+((20*zoom)*i)
         end
         GUI.elements.select_box[i] = dgsImage(box_x, GUI.pos.select_box.y, GUI.scale.select_box.w, GUI.scale.select_box.h, GUI.txt.select_box, false)
         local image = GUI.elements.select_box[i]
@@ -81,13 +82,13 @@ function drawCharacterSelection()
         label:setFont(GUI.fonts.poppins_regular_22)
 
         local fontHeight = GUI.fonts.poppins_regular_22:getHeight()
-        local label = dgsLabel(GUI.pos.box_header_label.x, GUI.pos.box_header_label.y+fontHeight/2+5/zoom, 0, 0, label_content, false, tocolor(155, 152, 162))
+        local label = dgsLabel(GUI.pos.box_header_label.x, GUI.pos.box_header_label.y+fontHeight/2+5*zoom, 0, 0, label_content, false, tocolor(155, 152, 162))
         label:setParent(image)
         label:setFont(GUI.fonts.poppins_medium_37)
         label:setProperty("colorCoded", true)
 
         local fontHeightNew = GUI.fonts.poppins_light_15:getHeight()
-        local label = dgsLabel(GUI.pos.box_header_label.x, GUI.pos.box_header_label.y+fontHeight/2+5/zoom+fontHeightNew+30/zoom, 0, 0, label_description, false, tocolor(155, 152, 162))
+        local label = dgsLabel(GUI.pos.box_header_label.x, GUI.pos.box_header_label.y+fontHeight/2+5*zoom+fontHeightNew+30*zoom, 0, 0, label_description, false, tocolor(155, 152, 162))
         label:setProperty("colorCoded", true)
         label:setParent(image)
         label:setFont(GUI.fonts.poppins_light_15)
@@ -98,7 +99,7 @@ function drawCharacterSelection()
         if(i == 0) then
             slider_y = GUI.pos.slider_box.y
         else
-            slider_y = GUI.pos.slider_box.y-(9*i/zoom)-GUI.scale.slider_box.h*i
+            slider_y = GUI.pos.slider_box.y-(9*i*zoom)-GUI.scale.slider_box.h*i
         end
         GUI.elements.slider_box[i] = dgsImage(GUI.pos.slider_box.x, slider_y, GUI.scale.slider_box.w, GUI.scale.slider_box.h, GUI.txt.slider_box, false)
         local slider_bg = GUI.elements.slider_box[i]
@@ -139,13 +140,13 @@ function drawCharacterSelection()
     image:setParent(ch_name)
         
     local fontHeight = GUI.fonts.poppins_medium_32:getHeight()
-    local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight-30/zoom, 0, 0, "#cac9cc"..charactersT[1].name.." "..charactersT[1].surname, false, tocolor(155, 152, 162))
+    local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight-30*zoom, 0, 0, "#cac9cc"..charactersT[1].name.." "..charactersT[1].surname, false, tocolor(155, 152, 162))
     label:setParent(image)
     label:setProperty("alignment", {"center","center"})
     label:setFont(GUI.fonts.poppins_medium_32)
     label:setProperty("colorCoded", true)
 
-    local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight+30/zoom, 0, 0, "#cac9ccUID "..charactersT[1].id, false, tocolor(155, 152, 162))
+    local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight+30*zoom, 0, 0, "#cac9ccUID "..charactersT[1].id, false, tocolor(155, 152, 162))
     label:setParent(image)
     label:setProperty("alignment", {"center","center"})
     label:setFont(GUI.fonts.poppins_light_18)
@@ -158,8 +159,8 @@ function selectCharacter()
     for i,v in pairs(GUI.elements.ch_name) do
         v:destroy()
     end
-    fadeCamera(false, 1)
-    triggerServerEvent("onCharacterSelection", resourceRoot, charactersT[currentCharacter].id)
+    Camera.fade(false, 1)
+    triggerServerEvent("server:characterSelection", resourceRoot, charactersT[currentCharacter].id)
     for i,v in pairs(selectionCharacters) do
         if isElement(v.element) then
             v.element:destroy()
@@ -176,7 +177,7 @@ function updateLabels()
         elseif(i==1) then
             label_content = "#83d19b$#cac9cc"..formatNumber(charactersT[currentCharacter].money, ",")
         elseif(i==2) then
-            label_content = "#7a79b5"..exports.entityData:getEntityData(localPlayer, "member_points")
+            label_content = "#7a79b5"..exports.entityData:getEntityData(localPlayer, "member_points") or 0
         elseif(i==3) then
             local game_h, game_m = msToGameTime(charactersT[currentCharacter].playtime)
             label_content = "#799eb5"..game_h.."h "..game_m.."m"
@@ -200,7 +201,7 @@ end
 function moveCharacter(key)
     if(key == "arrow_l") then
         local ped = selectionCharacters[currentCharacter].element
-        setTimer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
+        Timer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
         ped:setRotation(0, 0, 180, "default", true)
         setPedAnalogControlState(ped, "forwards", 0.5)
 
@@ -222,20 +223,20 @@ function moveCharacter(key)
         image:setParent(ch_name)
             
         local fontHeight = GUI.fonts.poppins_medium_32:getHeight()
-        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight-30/zoom, 0, 0, "#cac9cc"..charactersT[currentCharacter].name.." "..charactersT[currentCharacter].surname, false, tocolor(155, 152, 162))
+        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight-30*zoom, 0, 0, "#cac9cc"..charactersT[currentCharacter].name.." "..charactersT[currentCharacter].surname, false, tocolor(155, 152, 162))
         label:setParent(image)
         label:setProperty("alignment", {"center","center"})
         label:setFont(GUI.fonts.poppins_medium_32)
         label:setProperty("colorCoded", true)
     
-        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight+30/zoom, 0, 0, "#cac9ccUID "..charactersT[currentCharacter].id, false, tocolor(155, 152, 162))
+        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight+30*zoom, 0, 0, "#cac9ccUID "..charactersT[currentCharacter].id, false, tocolor(155, 152, 162))
         label:setParent(image)
         label:setProperty("alignment", {"center","center"})
         label:setFont(GUI.fonts.poppins_light_18)
         label:setProperty("colorCoded", true)
 
-        setTimer(destroyElement, 1000, 1, ped)
-        setTimer(function()
+        Timer(destroyElement, 1000, 1, ped)
+        Timer(function()
             setPedAnalogControlState(newPed, "forwards", 0)
             newPed:setRotation(0,0,-90,"default", true)
             bindKey("arrow_r", "down", moveCharacter)
@@ -246,7 +247,7 @@ function moveCharacter(key)
         updateLabels()
     else
         local ped = selectionCharacters[currentCharacter].element
-        setTimer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
+        Timer(destroyElement, 1000,1, GUI.elements.ch_name[currentCharacter]:getElement())
         ped:setRotation(0, 0, 0, "default", true)
         setPedAnalogControlState(ped, "forwards", 0.5)
 
@@ -267,21 +268,21 @@ function moveCharacter(key)
         image:setParent(ch_name)
             
         local fontHeight = GUI.fonts.poppins_medium_32:getHeight()
-        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight-30/zoom, 0, 0, "#cac9cc"..charactersT[currentCharacter].name.." "..charactersT[currentCharacter].surname, false, tocolor(155, 152, 162))
+        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight-30*zoom, 0, 0, "#cac9cc"..charactersT[currentCharacter].name.." "..charactersT[currentCharacter].surname, false, tocolor(155, 152, 162))
         label:setParent(image)
         label:setProperty("alignment", {"center","center"})
         label:setFont(GUI.fonts.poppins_medium_32)
         label:setProperty("colorCoded", true)
     
-        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight+30/zoom, 0, 0, "#cac9ccUID "..charactersT[currentCharacter].id, false, tocolor(155, 152, 162))
+        local label = dgsLabel(GUI.scale.character_name.w/2, fontHeight+30*zoom, 0, 0, "#cac9ccUID "..charactersT[currentCharacter].id, false, tocolor(155, 152, 162))
         label:setParent(image)
         label:setProperty("alignment", {"center","center"})
         label:setFont(GUI.fonts.poppins_light_18)
         label:setProperty("colorCoded", true)
 
         setPedAnalogControlState(newPed, "forwards", 0.5)
-        setTimer(destroyElement, 1000, 1, ped)
-        setTimer(function()
+        Timer(destroyElement, 1000, 1, ped)
+        Timer(function()
             setPedAnalogControlState(newPed, "forwards", 0)
             newPed:setRotation(0,0,-90,"default", true)
             bindKey("arrow_r", "down", moveCharacter)

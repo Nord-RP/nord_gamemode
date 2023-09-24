@@ -72,13 +72,62 @@ authTokenModel = DBConn:define("mta_auth_token", {
     id={
         type = DBManager.INT(11),
         primaryKey = true,
-        autoIncrement = true
+    },
+    member_id={
+        type = DBManager.INT(11),
     },
     token={
         type = DBManager.STRING(255),
     },
 })
 
+
+vehiclesModel = DBConn:define("mta_vehicles", {
+    id={
+        type = DBManager.INT(11),
+        primaryKey = true,
+    },
+    model={
+        type = DBManager.INT(6),
+    },
+    owner={
+        type = DBManager.INT(11),
+    },
+    owner_type={
+        type = DBManager.INT(4),
+    },
+    fuel={
+        type = DBManager.INT(4),
+    },
+    health={
+        type = DBManager.INT(6),
+    },
+    mileage={
+        type = DBManager.INT(11),
+    },
+    plate={
+        type = DBManager.STRING(8),
+    },
+    color={
+        type = DBManager.STRING(255),
+    },    
+    spawn_position={
+        type = DBManager.STRING(255),
+    },
+    favorite={
+        type = DBManager.INT(1),
+    }
+})
+
+adminsModel = DBConn:define("mta_admins", {
+    user_id={
+        type = DBManager.INT(11),
+        primaryKey = true,
+    },
+    level={
+        type = DBManager.INT(4),
+    },
+})
 
 
 DBConn:sync()
